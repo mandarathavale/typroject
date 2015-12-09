@@ -1,4 +1,4 @@
-import java.awt.*;
+//import java.awt.*;
 import java.io.*;
 import javax.swing.*;
 
@@ -88,7 +88,9 @@ public class Keyaddition {
 		
 		
 		if(plainText.length() >= secretKey.length()){
-			
+			/*if length of text to be encrypted is equal to length of the 
+			 * key entered add characters of the key to the text and append 
+			 * the result to the encryptedText string*/
 			if(plainText.length() == secretKey.length()){
 					for(int i =0 ;i<plainText.length();i++){
 						char temp = (char)(plainText.charAt(i)+secretKey.charAt(i));
@@ -96,7 +98,8 @@ public class Keyaddition {
 						encryptedText.append(newstr);
 				}
 			}
-			
+			/*calculate differance between length of key and text and expand key to 
+			 * the length of the text*/
 			else{
 				int diff = plainText.length() - secretKey.length();
 				int j = 0;
@@ -122,7 +125,8 @@ public class Keyaddition {
 			System.out.println("Encrypted Text: \n"+encryptedText);
 				
 		}
-		
+		/*if length of key entered is bigger than length of text to be encrypted
+		 * throw error message*/
 		else{
 			JFrame parent = new JFrame();
 
