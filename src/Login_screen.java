@@ -100,6 +100,94 @@ public class Login_screen extends JFrame {
 			}
 		});
 		
+		
+		/*log.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				String st1=login.getText();
+				text_pattern=Pattern.compile("[a-zA-Z]{2,10}");
+				mat_matcher=text_pattern.matcher(st1);
+				if(!mat_matcher.matches())
+				{
+					if(!st1.isEmpty())
+					{
+						fnameerror_label.setText("* Invalid first name");
+					}
+					fnameerror_label.setVisible(true);
+					flag=true;
+				}
+					
+				/*String st2=ln_textfield.getText();
+				text_pattern=Pattern.compile("[a-zA-Z]{2,10}");
+				mat_matcher=text_pattern.matcher(st2);
+				if(!mat_matcher.matches())
+				{
+					if(!st2.isEmpty())
+					{
+						lnameerror_label.setText("* Invalid last name");
+					}
+					lnameerror_label.setVisible(true);
+					flag=true;
+				}
+					
+				String st3=username_textfield.getText();
+				username_pattern=Pattern.compile("[a-zA-Z0-9a-zA-Z]{2,10}");			
+				contact_matcher=username_pattern.matcher(st3);
+				if(!contact_matcher.matches())
+				{
+					if(!st3.isEmpty())
+					{
+						usernameerror_label.setText("* Invalid contact number");
+					}
+					usernameerror_label.setVisible(true);
+					flag=true;
+				}
+				
+				String st4=email_textfield.getText();
+				email_pattern=Pattern.compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+				email_matcher=email_pattern.matcher(st4);
+				if(!email_matcher.matches())
+				{
+					if(!st4.isEmpty())
+					{
+						emailerror_label.setText("* Invalid email id");
+					}
+					emailerror_label.setVisible(true);
+					flag=true;
+				}
+				*/	
+	/*			String st5=uname_textfield.getText();
+				contact_pattern=Pattern.compile("[0-9]{8,13}");
+				username_matcher=username_pattern.matcher(st5);
+				if(!username_matcher.matches())
+				{
+					if(!st5.isEmpty())
+					{
+						usernameerror_label.setText("* Invalid User name");
+					}
+					usernameerror_label.setVisible(true);
+					flag=true;
+				}*/
+				
+	/*			String st6=pw_textfield.getText();
+				password_pattern=Pattern.compile("[a-z0-9A-Z]{2,10}");
+				password_matcher=password_pattern.matcher(st6);
+				if(!password_matcher.matches())
+				{
+					if(!st6.isEmpty())
+					{
+						passworderror_label.setText("* Invalid Password");
+					}
+					passworderror_label.setVisible(true);
+					flag=true;
+				}
+				
+			}
+		});
+	*/	
 		this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/home/mandar/workspace/Cryptography/src/yahoo2.jpg")))));
 		
 		add(title);

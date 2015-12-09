@@ -21,6 +21,7 @@ public class Forgot_pass {
 		frame = new JFrame();
 		frame.setBounds(0,0,screenSize.width, screenSize.height);
 		frame.setLayout(null);  
+		
 		DefaultComboBoxModel securityq = new DefaultComboBoxModel();
 
 	      securityq.addElement("What was your first school?");
