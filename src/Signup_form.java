@@ -198,7 +198,7 @@ public class Signup_form{
 					if(!st6.isEmpty())
 					{
 						System.out.println("pass");
-						passworderror_label.setText("* Invalid Password minimum len is 8");
+						passworderror_label.setText("* Invalid Password min len 8 max len 10");
 					}
 					passworderror_label.setVisible(true);
 					flag=true;

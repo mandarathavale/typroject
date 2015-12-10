@@ -10,12 +10,12 @@ import java.nio.file.StandardCopyOption;
 
 public class File_chooser{
 
-	public void init()
+	public String init()
 	{
 		JFrame parentFrame = new JFrame();
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setDialogTitle("Upload a file to directory");   
-		
+		String path = new String();
 		int userSelection = fileChooser.showOpenDialog(null);
 		 
 		
@@ -24,7 +24,7 @@ public class File_chooser{
 		{
 		    File fileToSave = fileChooser.getSelectedFile();
 		    System.out.println(fileToSave.getAbsolutePath());
-		  
+		    path = fileChooser.getSelectedFile().getAbsolutePath();
 		  try {
 			  		/*Files.copy(fileToSave.toPath(),	
 			  				(new File("D:\\Movies\\Files" + fileToSave.getName())).toPath(),
@@ -62,7 +62,7 @@ public class File_chooser{
 				e.printStackTrace();
 			}
 		    
-		    
+		  
 		}
 		
 		
@@ -77,6 +77,7 @@ public class File_chooser{
 		//parentFrame.setResizable(true);
 		parentFrame.pack();
 		parentFrame.dispose();
+		return path;
 	}
 	public static void main(String[] args)
 	{

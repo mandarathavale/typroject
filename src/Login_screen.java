@@ -137,8 +137,9 @@ public class Login_screen {
 					else
 					{
 						JOptionPane.showMessageDialog(null,"Login not successful");
+						frame.dispose();
 						Login_screen obj = new Login_screen();
-						frame.dispose();    
+						obj.init();    
 					}
 				}
 				catch(Exception e1)
