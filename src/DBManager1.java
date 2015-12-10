@@ -65,7 +65,8 @@ public class DBManager1
 		try
 		{
 				rs = st.executeQuery(query);
-		}catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			System.out.println("Exception in fetchQuery"+e.getMessage());
 		}		
@@ -84,6 +85,30 @@ public class DBManager1
 			System.out.println("Exception in insertRecord"+e.getMessage());
 		}	
 	}
+	
+	
+
+	public int updateRecord(String query)
+	{
+		try
+		{
+				int rs = st.executeUpdate(query);
+				System.out.println(rs);
+				if(rs>0)
+				{
+					//return 1;
+					System.out.println("updated Successfully!!!!!!!!!!!");
+					return 1;
+				}
+				
+		}catch(Exception e)
+		{
+			System.out.println("Exception in insertRecord"+e.getMessage());
+		}	
+		return 0;
+	}
+	
+	
 	
 	public void deleteRecord(String query)
 	{

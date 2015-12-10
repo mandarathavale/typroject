@@ -130,6 +130,14 @@ public class Signup_form{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
+				passconform_label.setVisible(false);
+				emailerror_label.setVisible(false);
+				nameerror_label.setVisible(false);
+				usernameerror_label.setVisible(false);
+				passworderror_label.setVisible(false);
+				answererror_label.setVisible(false);
+
+				
 				boolean flag = false;
 				System.out.println("submit");
 				String st1=name.getText();										//name pattern
