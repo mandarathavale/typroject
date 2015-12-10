@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.*;
 import javax.imageio.*;
@@ -12,9 +14,11 @@ public class Login_screen extends JFrame {
 	
 	final String adminid="admin",adminpass="admin";
 	JTextField login;
-	JLabel title,id,pass,sign,forg;
+	JLabel title,id,pass,sign,forg,passerror_label,useriderror_label;
 	JPasswordField passwd;
 	JButton log,pss,signup,forgot;
+	Pattern pass_pattern,userid_pattern;
+	Matcher mat_matcher;
 	//Image i1;
 	//private Image backgroundImage = ImageIO.read(new File("image1.png"));
 	
@@ -37,7 +41,8 @@ public class Login_screen extends JFrame {
 		sign = new JLabel("New to this site? ---->>");
 		forg = new JLabel("Forgot your Password??");
 	
-		
+		useriderror_label = new JLabel("*");
+		passerror_label = new JLabel("*");
 		
 		pss.addActionListener(new ActionListener() {
 			
@@ -101,93 +106,41 @@ public class Login_screen extends JFrame {
 		});
 		
 		
-		/*log.addActionListener(new ActionListener() {
+		log.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				boolean flag = false;
 				String st1=login.getText();
-				text_pattern=Pattern.compile("[a-zA-Z]{2,10}");
-				mat_matcher=text_pattern.matcher(st1);
+				userid_pattern=Pattern.compile("[a-zA-Z0-9]{8,10}");
+				mat_matcher=userid_pattern.matcher(st1);
 				if(!mat_matcher.matches())
 				{
 					if(!st1.isEmpty())
 					{
-						fnameerror_label.setText("* Invalid first name");
+						useriderror_label.setText("* Invalid first name");
 					}
-					fnameerror_label.setVisible(true);
+					useriderror_label.setVisible(true);
 					flag=true;
 				}
 					
-				/*String st2=ln_textfield.getText();
-				text_pattern=Pattern.compile("[a-zA-Z]{2,10}");
-				mat_matcher=text_pattern.matcher(st2);
+				String st2=passwd.getText();
+				pass_pattern=Pattern.compile("[a-z0-9A-Z]{2,10}");
+				mat_matcher=pass_pattern.matcher(st2);
 				if(!mat_matcher.matches())
 				{
 					if(!st2.isEmpty())
 					{
-						lnameerror_label.setText("* Invalid last name");
+						passerror_label.setText("* Invalid last name");
 					}
-					lnameerror_label.setVisible(true);
-					flag=true;
-				}
-					
-				String st3=username_textfield.getText();
-				username_pattern=Pattern.compile("[a-zA-Z0-9a-zA-Z]{2,10}");			
-				contact_matcher=username_pattern.matcher(st3);
-				if(!contact_matcher.matches())
-				{
-					if(!st3.isEmpty())
-					{
-						usernameerror_label.setText("* Invalid contact number");
-					}
-					usernameerror_label.setVisible(true);
-					flag=true;
-				}
-				
-				String st4=email_textfield.getText();
-				email_pattern=Pattern.compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-				email_matcher=email_pattern.matcher(st4);
-				if(!email_matcher.matches())
-				{
-					if(!st4.isEmpty())
-					{
-						emailerror_label.setText("* Invalid email id");
-					}
-					emailerror_label.setVisible(true);
-					flag=true;
-				}
-				*/	
-	/*			String st5=uname_textfield.getText();
-				contact_pattern=Pattern.compile("[0-9]{8,13}");
-				username_matcher=username_pattern.matcher(st5);
-				if(!username_matcher.matches())
-				{
-					if(!st5.isEmpty())
-					{
-						usernameerror_label.setText("* Invalid User name");
-					}
-					usernameerror_label.setVisible(true);
-					flag=true;
-				}*/
-				
-	/*			String st6=pw_textfield.getText();
-				password_pattern=Pattern.compile("[a-z0-9A-Z]{2,10}");
-				password_matcher=password_pattern.matcher(st6);
-				if(!password_matcher.matches())
-				{
-					if(!st6.isEmpty())
-					{
-						passworderror_label.setText("* Invalid Password");
-					}
-					passworderror_label.setVisible(true);
+					passerror_label.setVisible(true);
 					flag=true;
 				}
 				
 			}
 		});
-	*/	
+		
 		this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/home/mandar/workspace/Cryptography/src/yahoo2.jpg")))));
 		
 		add(title);
@@ -198,6 +151,7 @@ public class Login_screen extends JFrame {
 		add(log);
 		add(pss);
 		add(signup);add(sign);add(forg);
+		//this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/home/mandar/workspace/Cryptography/src/yahoo2.jpg")))));
 		this.setResizable(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();

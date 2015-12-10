@@ -19,7 +19,7 @@ public class Signup_form{
 	JComboBox securityQ;
 	JPasswordField pass,pass1;
 	JFrame frame;
-	DBManager1 DB = new DBManager1();
+	DBManager DB;
 
 	Pattern name_pattern,email_pattern,username_pattern,password_pattern,answer_pattern;
 	Matcher mat_matcher,email_matcher,username_matcher,password_matcher,answer_matcher;
@@ -133,7 +133,7 @@ public class Signup_form{
 				boolean flag = false;
 				System.out.println("submit");
 				String st1=name.getText();										//name pattern
-				name_pattern=Pattern.compile("[a-zA-Z ]{2,30}");
+				name_pattern=Pattern.compile("[a-zA-Z]{2,10}");
 				mat_matcher=name_pattern.matcher(st1);
 				
 				if(!mat_matcher.matches())
@@ -150,7 +150,7 @@ public class Signup_form{
 				
 				String st3=userid.getText();									//userid pattern
 			
-				username_pattern=Pattern.compile("[a-zA-Z0-9]{8,10}");			
+				username_pattern=Pattern.compile("[a-zA-Z0-9a-zA-Z]{8,10}");			
 				username_matcher = username_pattern.matcher(st3);
 				if(!username_matcher.matches())
 				{
@@ -210,46 +210,42 @@ public class Signup_form{
 				}
 				
 				st7 = securityQ.getSelectedItem().toString();
-				String st8 = answer.getText();
+				String st8 = ans.getText();
 				
 				answer_pattern = Pattern.compile("[a-zA-Z ]");
 				answer_matcher = answer_pattern.matcher(st8);
 				
-				//if(!answer_matcher.matches())
-				//{
+				/*if(!answer_matcher.matches())
+				{
 					if(st8.isEmpty() == true)
 					{
 						System.out.println("answer");
 						answererror_label.setText("* answer field should not be empty");
-						answererror_label.setVisible(true);
-						flag = true;
-						System.out.println("in answer");
-				
 					}
-					//	}
-			//	*/
+					answererror_label.setVisible(true);
+					flag = true;
+					System.out.println("in answer");
+				}
+				*/
 			
 		
 				System.out.println("FLAG: "+flag);
 		
 			if(!flag)
 			{	
-				
-				DB.loader();
-				DB.getConnection();
-				int id=DB.getMaxId();
+				//int id=DB.getMaxId();
 				try
 				{
+					DB.loader("com.psql.jdbc.Driver");
+					DB.getConnection("jdbc:psql://localhost:3306//mandar");
 					
-					//DB.getConnection("")
-					PreparedStatement ps = DB.con.prepareStatement("insert into usertab1 values(?,?,?,?,?,?,?)");
-					ps.setInt(1, id);
-					ps.setString(2,st3);
-					ps.setString(3,st6);
-					ps.setString(4,st1);
-					ps.setString(5,st4);
-					ps.setString(6,st7);
-					ps.setString(7,st8);
+					PreparedStatement ps = DB.con.prepareStatement("insert into user values(?,?,?,?,?,?)");
+					ps.setString(1,st1);
+					ps.setString(2,st6);
+					ps.setString(3,st1);
+					ps.setString(4,st4);
+					ps.setString(5,st7);
+					ps.setString(6,st8);
 					
 					int num=ps.executeUpdate();
 					
@@ -257,8 +253,7 @@ public class Signup_form{
 					{
 						JOptionPane.showMessageDialog(null, "Inserted Succesfully");
 						frame.dispose();
-						Login_screen obj = new Login_screen();
-						obj.init();
+						new Login_screen();
 					}
 					else
 					{
