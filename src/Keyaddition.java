@@ -39,52 +39,32 @@ public class Keyaddition {
 	
 	
 	public static void main(String[] args) throws Exception {
-		
-		String plainText = "/home/mandar/workspace/Cryptography/src/file.txt";
-		
+
 		System.out.println("Enter the key: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		key = br.readLine();
 		
-		
-		//System.out.println("afcadg");
-		RandomAccessFile obj = new RandomAccessFile(plainText, "r");
-		byte[] plain = new byte[(int) obj.length()];
-		obj.readFully(plain);
-		String normalText = new String(plain);
-		obj.close();
-		
-		StringBuilder encryptedText = encrypt(normalText,key);
-		String encrypted = new String(encryptedText);
-		
-		obj = new RandomAccessFile("/home/mandar/Files/Encrypted.txt","rw");
-		obj.write(encrypted.getBytes());
-		obj.close();
-		
-		/*obj = new RandomAccessFile("/home/mandar/Files/Rot.txt", "r");
-		plain = new byte[(int) obj.length()];
-		obj.readFully(plain);
-		encrypted = new String(plain);
-		obj.close();
-		*/
-		
-		
-		StringBuilder decryptedText = decrypt(encrypted,key);
-		String decrypted = new String(decryptedText);
-		
-		obj = new RandomAccessFile("/home/mandar/Files/Decrypted.txt","rw");
-		obj.write(decrypted.getBytes());
-		obj.close();
 	
+		RandomAccessFile encryptedFile = new RandomAccessFile("/media/nahush/New Volume/EncryptedFiles/Encrypted.txt","rw");
+		RandomAccessFile decryptedFile = new RandomAccessFile("/media/nahush/New Volume/DecryptedFiles/Decrypted.txt","rw");
+		
+		encrypt(decryptedFile,key);
+		decrypt(encryptedFile,key);
 	}
 
 	
 	
-	public static StringBuilder encrypt(String plainText, String secretKey)
+	public static void encrypt(RandomAccessFile file, String secretKey)
 			throws Exception {
 		
 		StringBuilder newKey = new StringBuilder(secretKey);
 		StringBuilder encryptedText = new StringBuilder();
+		
+		byte[] plain = new byte[(int) file.length()];
+		file.readFully(plain);
+		String plainText = new String(plain);
+		System.out.println(plainText);
+		file.close();
 		
 		
 		if(plainText.length() >= secretKey.length()){
@@ -134,17 +114,20 @@ public class Keyaddition {
 			//System.out.println("Invalid Key");
 			System.exit(0);
 		}
-			
-		return encryptedText;
-		
-		
+		//Write the encrypted text to the file at the predefined location
+		RandomAccessFile obj = new RandomAccessFile("/media/nahush/New Volume/EncryptedFiles/Encrypted.txt","rw");
+		obj.write(encryptedText.toString().getBytes());
+		obj.close();
 	}
 
-	public static StringBuilder decrypt(String encryptedText, String secretKey) throws IOException
+	public static void decrypt(RandomAccessFile file, String secretKey) throws IOException
 	{	
 		StringBuilder newKey = new StringBuilder(secretKey);
 		StringBuilder decryptedText = new StringBuilder();
-		
+		byte[] encrypted = new byte[(int) file.length()];
+		file.readFully(encrypted);
+		String encryptedText = new String(encrypted);
+		file.close();
 		
 		if(encryptedText.length() >= secretKey.length()){
 			
@@ -189,7 +172,8 @@ public class Keyaddition {
 		    JOptionPane.showMessageDialog(parent, "Invalid key");
 		    System.exit(0);
 		}
-			
-		return decryptedText;
+		RandomAccessFile obj  = new RandomAccessFile("/media/nahush/New Volume/DecryptedFiles/Decrypted.txt","rw");
+		obj.write(decryptedText.toString().getBytes());
+		obj.close();
 	}
 }
