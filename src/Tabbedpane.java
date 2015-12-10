@@ -44,7 +44,8 @@ public class Tabbedpane {
 	        deletepath = new JTextField(150);
 	        
 	        JTabbedPane jtp = new JTabbedPane();
-	        
+	        jtp.setBounds(0, 150, screenSize.width, screenSize.height);
+
 	        filepath.setEditable(false);
 	        encryptpath.setEditable(false);
 	        decryptpath.setEditable(false);
@@ -73,7 +74,6 @@ public class Tabbedpane {
 	        jp2.setLayout(null);
 	        //jp1.setBounds(0, 50,screenSize.width , screenSize.height);
 	        //jp2.setBounds(0, 50,screenSize.width , screenSize.height);
-	        jtp.setBounds(0, 50, screenSize.width, screenSize.height);
 	        jp2.add(b1);
 	        jp1.add(b2);
 	        jp1.add(l1);
@@ -112,7 +112,6 @@ public class Tabbedpane {
 	      
 	        jtp.addTab("<html><body leftmargin=50 topmargin=8 marginwidth=80 marginheight=5>Uploading File</body></html>", jp1);
 	        jtp.addTab("<html><body leftmargin=50 topmargin=8 marginwidth=80 marginheight=5>Encrypt & Decrypt</body></html>", jp2);
-	        
 	        frame.add(jtp);
 	        frame.setVisible(true);
 	    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
