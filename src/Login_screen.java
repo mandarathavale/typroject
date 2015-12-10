@@ -4,16 +4,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
+import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.*;
 import javax.imageio.*;
 
-public class Login_screen extends JFrame {
+public class Login_screen {
 	
 	final String adminid="admin",adminpass="admin";
 	JTextField login;
+	JFrame frame;
 	JLabel title,id,pass,sign,forg,passerror_label,useriderror_label;
 	JPasswordField passwd;
 	JButton log,pss,signup,forgot;
@@ -27,8 +29,9 @@ public class Login_screen extends JFrame {
 	void init() throws IOException
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setBounds(0,0,screenSize.width, screenSize.height);
-		this.setLayout(null);
+		frame = new JFrame("Login");
+		frame.setBounds(0,0,screenSize.width, screenSize.height);
+		frame.setLayout(null);
 		login = new JTextField(20);
 		title = new JLabel("Cryptography");
 		title.setFont(new Font("Serif", Font.BOLD, 50));
@@ -95,7 +98,7 @@ public class Login_screen extends JFrame {
 			public void actionPerformed(ActionEvent arg0){
 				// TODO Auto-generated method stub
 				Signup_form obj = new Signup_form();
-				dispose();
+				frame.dispose();
 				try {
 					obj.init();
 				} catch (IOException e) {
@@ -112,7 +115,40 @@ public class Login_screen extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				boolean flag = false;
-				String st1=login.getText();
+			
+				String st1 = login.getText();
+				String st2 = passwd.getText();
+				
+				try
+				{
+					DBManager1 db1= new DBManager1();
+					db1.loader();
+					db1.getConnection();
+					String query="select * from usertab1 where user_id='"+st1+"'"+"and pass='"+st2+"'";
+					ResultSet rs1=db1.fetchQuery(query);
+					if(rs1.next())
+					{	
+						int id=rs1.getInt(1);
+						frame.dispose();
+						Tabbedpane obj = new Tabbedpane();
+						obj.init();
+						//new home(u1);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null,"Login not successful");
+						Login_screen obj = new Login_screen();
+						frame.dispose();    
+					}
+				}
+				catch(Exception e1)
+				{
+					e1.printStackTrace();
+					e1.getMessage();
+				}
+				
+				
+				/*	String st1=login.getText();
 				userid_pattern=Pattern.compile("[a-zA-Z0-9]{8,10}");
 				mat_matcher=userid_pattern.matcher(st1);
 				if(!mat_matcher.matches())
@@ -136,26 +172,28 @@ public class Login_screen extends JFrame {
 					}
 					passerror_label.setVisible(true);
 					flag=true;
-				}
+				}*/
+				
+				
 				
 			}
 		});
 		
-		this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/home/mandar/workspace/Cryptography/src/yahoo2.jpg")))));
+		frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/home/mandar/workspace/Cryptography/src/yahoo2.jpg")))));
 		
-		add(title);
-		add(id);
-		add(pass);
-		add(login);
-		add(passwd);
-		add(log);
-		add(pss);
-		add(signup);add(sign);add(forg);
+		frame.add(title);
+		frame.add(id);
+		frame.add(pass);
+		frame.add(login);
+		frame.add(passwd);
+		frame.add(log);
+		frame.add(pss);
+		frame.add(signup);frame.add(sign);frame.add(forg);
 		//this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/home/mandar/workspace/Cryptography/src/yahoo2.jpg")))));
-		this.setResizable(true);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.pack();
-		this.setVisible(true);
+		frame.setResizable(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
 		
 		
 	}
