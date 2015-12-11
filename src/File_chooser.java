@@ -1,11 +1,11 @@
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import java.awt.*;
+//import java.awt.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+//import java.nio.file.Files;
+//import java.nio.file.StandardCopyOption;
 
 
 public class File_chooser{

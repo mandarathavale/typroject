@@ -7,7 +7,6 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.swing.*;
 import javax.imageio.*;
 
@@ -30,6 +29,10 @@ public class Login_screen {
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frame = new JFrame("Login");
+		
+		//System.out.println(screenSize.width);
+		//System.out.println(screenSize.height);
+		
 		frame.setBounds(0,0,screenSize.width, screenSize.height);
 		frame.setLayout(null);
 		login = new JTextField(20);
@@ -61,6 +64,7 @@ public class Login_screen {
 			
 			public void mouseClicked(MouseEvent e)
 			{
+				frame.dispose();
 				Forgot_pass obj = new Forgot_pass();
 				obj.init();
 			}
@@ -97,8 +101,9 @@ public class Login_screen {
 			@Override
 			public void actionPerformed(ActionEvent arg0){
 				// TODO Auto-generated method stub
-				Signup_form obj = new Signup_form();
 				frame.dispose();
+				Signup_form obj = new Signup_form();
+				
 				try {
 					obj.init();
 				} catch (IOException e) {

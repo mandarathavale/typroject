@@ -1,8 +1,8 @@
-//import java.awt.*;
+import java.awt.*;
 import java.io.*;
 import javax.swing.*;
 
-public class Keyaddition {
+public class Keyaddition1 {
 
 	//static String tempKey;
 	static String key = new String();
@@ -38,59 +38,69 @@ public class Keyaddition {
 	
 	
 	
-	public static void main(String[] args) throws Exception {
-		
-		String plainText = "/home/mandar/workspace/Cryptography/src/file.txt";
+	public static void main(String[] args) {
 		
 		System.out.println("Enter the key: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		key = br.readLine();
+		try {
+			key = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+		
+		Keyaddition1 obj = new Keyaddition1();
+		try {
+			
+				obj.init("/home/mandar/Files/file.txt");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	/*	File normalText = new File("/home/mandar/workspace/Cryptography/src/file.txt");
+		File encryptedText = new File("/home/mandar/Encrypted_Files/file.txt");
+		encrypt(normalText,key);
+		decrypt(encryptedText,key);*/
 		
 		
-		//System.out.println("afcadg");
-		RandomAccessFile obj = new RandomAccessFile(plainText, "r");
-		byte[] plain = new byte[(int) obj.length()];
-		obj.readFully(plain);
-		String normalText = new String(plain);
-		obj.close();
 		
-		StringBuilder encryptedText = encrypt(normalText,key);
-		String encrypted = new String(encryptedText);
-		
-		obj = new RandomAccessFile("/home/mandar/Files/Encrypted.txt","rw");
-		obj.write(encrypted.getBytes());
-		obj.close();
-		
-		/*obj = new RandomAccessFile("/home/mandar/Files/Rot.txt", "r");
-		plain = new byte[(int) obj.length()];
-		obj.readFully(plain);
-		encrypted = new String(plain);
-		obj.close();
-		*/
-		
-		
-		StringBuilder decryptedText = decrypt(encrypted,key);
-		String decrypted = new String(decryptedText);
-		
-		obj = new RandomAccessFile("/home/mandar/Files/Decrypted.txt","rw");
-		obj.write(decrypted.getBytes());
-		obj.close();
-	
 	}
 
+	public static void init(String fname) throws Exception{
+		
+		//String normalfname
+		
+		File normalText = new File(fname);
+		String efname = "/home/mandar/Encrypted_Files/"+normalText.getName();
+		File encryptedText = new File(efname);
+		encrypt(normalText,key);
+		decrypt(encryptedText,key);
+	}
 	
-	
-	public static StringBuilder encrypt(String plainText, String secretKey)
+	public static void encrypt(File file, String secretKey)
 			throws Exception {
 		
 		StringBuilder newKey = new StringBuilder(secretKey);
 		StringBuilder encryptedText = new StringBuilder();
+		//BufferedReader br = new BufferedReader(new FileReader(file));
+		String plainText;
+		//String line = br.readLine();
+		
+		RandomAccessFile file1 = new RandomAccessFile(file,"rw");
+		byte b[] = new byte[(int) file1.length()];
+		file1.readFully(b);
+		plainText = new String(b);
+		/*while(line != null)
+		{
+			plainText = plainText + line;
+			line = br.readLine();
+		}*/
 		
 		
 		if(plainText.length() >= secretKey.length()){
-			/*if length of text to be encrypted is equal to length of the 
-			 * key entered add characters of the key to the text and append 
-			 * the result to the encryptedText string*/
+			
 			if(plainText.length() == secretKey.length()){
 					for(int i =0 ;i<plainText.length();i++){
 						char temp = (char)(plainText.charAt(i)+secretKey.charAt(i));
@@ -98,18 +108,17 @@ public class Keyaddition {
 						encryptedText.append(newstr);
 				}
 			}
-			/*calculate differance between length of key and text and expand key to 
-			 * the length of the text*/
+			
 			else{
 				int diff = plainText.length() - secretKey.length();
 				int j = 0;
 				
 				for(int i=0;i<diff;i++){
-					char temp = secretKey.charAt(j);
+					char temp =secretKey.charAt(j);
 					String temp2 = ""+temp;
 					newKey.append(temp2);
 					j++;
-					if(j == (secretKey.length()-1))
+					if(j == (secretKey.length()))
 						j = 0;
 				}
 				
@@ -122,11 +131,13 @@ public class Keyaddition {
 		
 			}
 			
-			System.out.println("Encrypted Text: \n"+encryptedText);
-				
+			String path = "/home/mandar/Encrypted_Files/" + file.getName(); 
+			RandomAccessFile encryptedFile = new RandomAccessFile(path,"rw");
+			encryptedFile.write(encryptedText.toString().getBytes());
+			encryptedFile.close();
+			
 		}
-		/*if length of key entered is bigger than length of text to be encrypted
-		 * throw error message*/
+		
 		else{
 			JFrame parent = new JFrame();
 
@@ -134,17 +145,31 @@ public class Keyaddition {
 			//System.out.println("Invalid Key");
 			System.exit(0);
 		}
-			
-		return encryptedText;
 		
 		
 	}
 
-	public static StringBuilder decrypt(String encryptedText, String secretKey) throws IOException
+	public static void decrypt(File file, String secretKey) throws IOException
 	{	
 		StringBuilder newKey = new StringBuilder(secretKey);
 		StringBuilder decryptedText = new StringBuilder();
+		//BufferedReader br = new BufferedReader(new FileReader(file));
+		String encryptedText = new String();
+			//,line = br.readLine();
 		
+		RandomAccessFile file1 = new RandomAccessFile(file,"rw");
+		byte b[] = new byte[(int) file1.length()];
+		file1.readFully(b);
+		encryptedText = new String(b);
+		
+		
+		
+		
+	/*	while(line != null)
+		{
+			encryptedText = encryptedText + line;
+			line = br.readLine();
+		}*/
 		
 		if(encryptedText.length() >= secretKey.length()){
 			
@@ -165,7 +190,7 @@ public class Keyaddition {
 					String temp2 = ""+temp;
 					newKey.append(temp2);
 					j++;
-					if(j == (secretKey.length()-1))
+					if(j == (secretKey.length()))
 						j = 0;
 				}
 				
@@ -180,7 +205,6 @@ public class Keyaddition {
 			}
 			
 			System.out.println("Decrypted Text: \n"+decryptedText);
-				
 		}
 		
 		else{
@@ -189,7 +213,11 @@ public class Keyaddition {
 		    JOptionPane.showMessageDialog(parent, "Invalid key");
 		    System.exit(0);
 		}
-			
-		return decryptedText;
+		//br.close();
+		String path = "/home/mandar/Decrypted_Files/" + file.getName();
+		RandomAccessFile obj = new RandomAccessFile(path,"rw");
+		obj.write(decryptedText.toString().getBytes());
+		obj.close();
+		//br.close();
 	}
 }
