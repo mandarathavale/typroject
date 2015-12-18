@@ -1,3 +1,4 @@
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -16,16 +17,19 @@ public class HideMessage {
 		String pixel[][] = new String[bimg.getWidth()][bimg.getHeight()];
 		binaryString = ASCII.encode(args[1]);
 		int a = 0;
-		System.out.println("Before bit adding: ");
 		
+		System.out.println("Before bit adding: ");
 		for(int i=0; i<bimg.getHeight(); i++)
 		{
 			for(int j=0; j<bimg.getWidth(); j++)
 			{
 				pixel[i][j] = Integer.toBinaryString(bimg.getRGB(i, j) & 0xff);
-				System.out.println(Integer.parseInt(pixel[i][j],2));
+				//System.out.println(Integer.parseInt(pixel[i][j],2));
+				System.out.println(pixel[i][j]);
 			}
 		}
+		
+		
 		
 		label:
 		for(int i=0; i<bimg.getHeight(); i++)
@@ -35,6 +39,7 @@ public class HideMessage {
 				binaryBlue = new StringBuilder();
 				binaryBlue.append(Integer.toBinaryString(bimg.getRGB(i, j) & 0xff));
 				binaryBlue.setCharAt(binaryBlue.length()-1, binaryString.charAt(a));
+			//	System.out.println(binaryBlue);
 				pixel[i][j] = binaryBlue.toString();
 				a++;
 				if(a == binaryString.length())
@@ -42,13 +47,18 @@ public class HideMessage {
 			}
 		}
 		
+		
+		
 		System.out.println("After bit adding: ");
-		for(int i=0; i<bimg.getWidth(); i++)
+		for(int i=0; i<bimg.getHeight(); i++)
 		{
-			for(int j=0; j<bimg.getHeight(); j++)
+			for(int j=0; j<bimg.getWidth(); j++)
 			{
-				System.out.println(Integer.parseInt(pixel[i][j],2));
+				//pixel[i][j] = Integer.toBinaryString(bimg.getRGB(i, j) & 0xff);
+				//System.out.println(Integer.parseInt(pixel[i][j],2));
+				System.out.println(pixel[i][j]);
 			}
 		}
+		
 	}
 }

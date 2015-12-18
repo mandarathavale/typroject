@@ -25,7 +25,9 @@ public class ASCII {
 			}	
 		}
 		file.close();
+		System.out.println(binaryString.toString());
 		return binaryString.toString();
+		
 	}
 	
 	//converts the given binary string to its text equivalent
