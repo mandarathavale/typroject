@@ -136,7 +136,7 @@ public class Login_screen {
 						int id=rs1.getInt(1);
 						frame.dispose();
 						Tabbedpane obj = new Tabbedpane();
-						obj.init();
+						obj.init(id);
 						//new home(u1);
 					}
 					else

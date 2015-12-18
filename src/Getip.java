@@ -2,7 +2,7 @@
 import java.net.InetAddress;
 import java.net.UnknownHostException;
  
-public class MyIpAddress {
+public class Getip {
  
     public static void main(String a[]){
      

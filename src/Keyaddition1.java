@@ -40,15 +40,6 @@ public class Keyaddition1 {
 	
 	public static void main(String[] args) {
 		
-		System.out.println("Enter the key: ");
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		try {
-			key = br.readLine();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			
-			e.printStackTrace();
-		}
 		
 		Keyaddition1 obj = new Keyaddition1();
 		try {
@@ -71,15 +62,24 @@ public class Keyaddition1 {
 	public static void init(String fname) throws Exception{
 		
 		//String normalfname
+		System.out.println("Enter the key: ");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			key = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
 		
 		File normalText = new File(fname);
 		String efname = "/home/mandar/Encrypted_Files/"+normalText.getName();
 		File encryptedText = new File(efname);
-		encrypt(normalText,key);
-		decrypt(encryptedText,key);
+	//	encrypt(normalText,key);
+	//	decrypt(encryptedText,key);
 	}
 	
-	public static void encrypt(File file, String secretKey)
+	public void encrypt(File file, String secretKey)
 			throws Exception {
 		
 		StringBuilder newKey = new StringBuilder(secretKey);
@@ -135,7 +135,8 @@ public class Keyaddition1 {
 			RandomAccessFile encryptedFile = new RandomAccessFile(path,"rw");
 			encryptedFile.write(encryptedText.toString().getBytes());
 			encryptedFile.close();
-			
+			file1.close();
+			//System.exit(0);
 		}
 		
 		else{
@@ -143,13 +144,13 @@ public class Keyaddition1 {
 
 		    JOptionPane.showMessageDialog(parent, "INVALID KEY");
 			//System.out.println("Invalid Key");
-			System.exit(0);
+			//System.exit(0);
 		}
 		
 		
 	}
 
-	public static void decrypt(File file, String secretKey) throws IOException
+	public void decrypt(File file, String secretKey) throws IOException
 	{	
 		StringBuilder newKey = new StringBuilder(secretKey);
 		StringBuilder decryptedText = new StringBuilder();
@@ -211,13 +212,14 @@ public class Keyaddition1 {
 			JFrame parent = new JFrame();
 
 		    JOptionPane.showMessageDialog(parent, "Invalid key");
-		    System.exit(0);
+		  //  System.exit(0);
 		}
 		//br.close();
 		String path = "/home/mandar/Decrypted_Files/" + file.getName();
 		RandomAccessFile obj = new RandomAccessFile(path,"rw");
 		obj.write(decryptedText.toString().getBytes());
 		obj.close();
+		//System.exit(0);
 		//br.close();
 	}
 }

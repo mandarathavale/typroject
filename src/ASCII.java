@@ -48,7 +48,7 @@ public class ASCII {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		System.out.println(ASCII.decode(ASCII.encode("/media/nahush/New Volume/DecryptedFiles/test.txt")));
+		System.out.println(ASCII.decode(ASCII.encode("/home/mandar/workspace/Cryptography/src/file.txt")));
 	}
 
 }

@@ -113,7 +113,7 @@ public class Signup_form{
 		passconform_label.setBounds(700,400,200,20);
 		
 		sec.setBounds(300,450,250,20);
-		securityQ.setBounds(550,450,250,20);
+		securityQ.setBounds(550,450,300,20);
 		
 		ans.setBounds(300,480,250,20);
 		answer.setBounds(550,480,250,20);
@@ -275,7 +275,7 @@ public class Signup_form{
 				}
 				catch(Exception e2)
 				{
-					JOptionPane.showMessageDialog(null, ""+e2.getMessage());
+					JOptionPane.showMessageDialog(null, "This userid is already taken. Please choose another");
 				}
 			}
 		
