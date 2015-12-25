@@ -25,9 +25,8 @@ public class ASCII {
 			}	
 		}
 		file.close();
-		System.out.println(binaryString.toString());
-		return binaryString.toString();
-		
+		//System.out.println(binaryString.toString());
+		return binaryString.toString();	
 	}
 	
 	//converts the given binary string to its text equivalent
@@ -42,7 +41,9 @@ public class ASCII {
 			//group 8 consecutive bits in a chunk
 			temp = binaryString.substring(i*8, Math.min((i+1)*8, binaryString.length()));
 			//find out the integer value of a chunk
-		    value = Integer.parseInt(temp, 2);
+		//    if(temp.equals('\0'))
+		  //  	break;
+			value = Integer.parseInt(temp, 2);
 		    //typecast integer value to char and append to normal string
 		    normalString += (char)value;
 		}
@@ -50,7 +51,6 @@ public class ASCII {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		System.out.println(ASCII.decode(ASCII.encode("/home/mandar/workspace/Cryptography/src/file.txt")));
+		//System.out.println(ASCII.decode(ASCII.encode("/home/mandar/workspace/Cryptography/src/file.txt")));
 	}
-
 }

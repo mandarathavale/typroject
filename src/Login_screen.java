@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.imageio.*;
 
 public class Login_screen {
@@ -49,6 +50,21 @@ public class Login_screen {
 	
 		useriderror_label = new JLabel("*");
 		passerror_label = new JLabel("*");
+		
+		
+		/*try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		}
+		*/
+		
+		
 		
 		pss.addActionListener(new ActionListener() {
 			
@@ -185,7 +201,7 @@ public class Login_screen {
 			}
 		});
 		
-		frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/home/mandar/workspace/Cryptography/src/yahoo2.jpg")))));
+		frame.setContentPane(new JLabel(new ImageIcon("/home/mandar/workspace/Cryptography/src/coderain.gif")));
 		
 		frame.add(title);
 		frame.add(id);
