@@ -1,16 +1,12 @@
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 public class Tabbedpane 
 {

@@ -52,5 +52,7 @@ public class ASCII {
 	
 	public static void main(String[] args) throws IOException {
 		//System.out.println(ASCII.decode(ASCII.encode("/home/mandar/workspace/Cryptography/src/file.txt")));
+		System.out.println(ASCII.encode("/home/mandar/workspace/Cryptography/src/file.txt"));
+		System.out.println(ASCII.decode("01010010"));
 	}
 }
