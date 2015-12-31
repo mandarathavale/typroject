@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.io.*;
 import javax.swing.*;
 
@@ -38,9 +37,29 @@ public class Keyaddition1 {
 	
 	
 	
-public static void init(String fname) throws Exception{
+public static void main(String[] args) {
 		
-		//String normalfname
+		
+		Keyaddition1 obj = new Keyaddition1();
+		try {
+			
+				obj.init("/home/nahush/Dec/test.txt");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	/*	File normalText = new File("/home/mandar/workspace/Cryptography/src/file.txt");
+		File encryptedText = new File("/home/mandar/Encrypted_Files/file.txt");
+		encrypt(normalText,key);
+		decrypt(encryptedText,key);*/
+		
+		
+		
+	}
+
+	public static void init(String fname) throws Exception{
+//String normalfname
 		System.out.println("Enter the key: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
@@ -52,7 +71,7 @@ public static void init(String fname) throws Exception{
 		}
 		
 		File normalText = new File(fname);
-		String efname = "/home/mandar/Encrypted_Files/"+normalText.getName();
+		String efname = "/home/nahush/Enc"+normalText.getName();
 		File encryptedText = new File(efname);
 	//	encrypt(normalText,key);
 	//	decrypt(encryptedText,key);
@@ -110,7 +129,7 @@ public static void init(String fname) throws Exception{
 		
 			}
 			
-			String path = "/home/mandar/Encrypted_Files/" + file.getName(); 
+			String path = "/home/nahush/Enc" + file.getName(); 
 			RandomAccessFile encryptedFile = new RandomAccessFile(path,"rw");
 			encryptedFile.write(encryptedText.toString().getBytes());
 			encryptedFile.close();
@@ -194,7 +213,7 @@ public static void init(String fname) throws Exception{
 		  //  System.exit(0);
 		}
 		//br.close();
-		String path = "/home/mandar/Decrypted_Files/" + file.getName();
+		String path = "/home/nahush/Dec" + file.getName();
 		RandomAccessFile obj = new RandomAccessFile(path,"rw");
 		obj.write(decryptedText.toString().getBytes());
 		obj.close();

@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.*;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.imageio.*;
 
 public class Login_screen {
 	
