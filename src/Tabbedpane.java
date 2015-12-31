@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.*;
@@ -148,46 +150,48 @@ public class Tabbedpane
 				{
 					File_chooser obj = new File_chooser();
 					path = obj.init(1,userid);
-					filepath.setText(path);
-					
-					DB.loader();
-					DB.getConnection();
-					int id=DB.getMaxIdFile();
-					try
+					if(path != null)
 					{
-						String[] filearray=path.split("/");
-						int size = filearray.length;
-						System.out.println("SIZE: "+size);
-						System.out.println("FILEARAY:" +filearray[size-1]);
-						String temp = filearray[size-1];
-						String[] fileext = temp.split("\\.");
-						int size1 = fileext.length;
-						PreparedStatement ps = DB.con.prepareStatement("insert into filetab1 values(?,?,?,?,?)");
-						ps.setInt(1, id);
-						ps.setInt(2,userid);
-						ps.setString(3,userid+filearray[size-1]);
-						ps.setString(4,path);
-						ps.setString(5,fileext[size1-1]);
-	
-						int num=ps.executeUpdate();
+						filepath.setText(path);
+						DB.loader();
+						DB.getConnection();
+						int id=DB.getMaxIdFile();
+						try
+						{
+							String[] filearray=path.split("/");
+							int size = filearray.length;
+							System.out.println("SIZE: "+size);
+							System.out.println("FILEARAY:" +filearray[size-1]);
+							String temp = filearray[size-1];
+							String[] fileext = temp.split("\\.");
+							int size1 = fileext.length;
+							PreparedStatement ps = DB.con.prepareStatement("insert into filetab1 values(?,?,?,?,?)");
+							ps.setInt(1, id);
+							ps.setInt(2,userid);
+							ps.setString(3,userid+filearray[size-1]);
+							ps.setString(4,path);
+							ps.setString(5,fileext[size1-1]);
+
+							int num=ps.executeUpdate();
 						
-						if(num>0)
-						{
-							JOptionPane.showMessageDialog(null, "Upload Successfull");
-							DB.closeConnection();
-							frame.dispose();
-							Tabbedpane obj1 = new Tabbedpane();
-							obj1.init(userid);
-						}
-						else
-						{
-							JOptionPane.showMessageDialog(null, "Upload Failed");
-						}
+							if(num>0)
+							{
+								JOptionPane.showMessageDialog(null, "Upload Successful");
+								DB.closeConnection();
+								Path p = Paths.get(path);
+								list1.addElement(userid+p.getFileName().toString());
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null, "Upload Failed");
+							}
+						
 					}		
 					catch(Exception e)
 					{
 						e.printStackTrace();
 					}
+				}
 				}
 			});
 	        
@@ -197,7 +201,7 @@ public class Tabbedpane
 				public void actionPerformed(ActionEvent arg0) 
 				{
 					String name = (String) jlist1.getSelectedValue();
-					String fname = "/home/mandar/Files_Uploaded/"+name;
+					String fname = "/home/nahush/Files_Uploaded/"+name;
 					System.out.println(fname);
 					
 					File file = new File(fname);
@@ -210,9 +214,8 @@ public class Tabbedpane
 						String query="delete from filetab1 where filename='"+name+"'";
 						temp.deleteRecord(query);
 						temp.closeConnection();
-						frame.dispose();
-						Tabbedpane obj1 = new Tabbedpane();
-						obj1.init(userid);
+						list1.removeElement(name);
+						JOptionPane.showMessageDialog(null, "Successfully Deleted");
 					}
 					else
 					{
@@ -245,7 +248,7 @@ public class Tabbedpane
 							if (userSelection1 == JFileChooser.APPROVE_OPTION) 
 							{
 							    File fileToSave1 = fileChooser1.getSelectedFile();
-							    String filepath = "/home/mandar/Files_Uploaded/"+fileToSave.getName();
+							    String filepath = "/home/nahush/Files_Uploaded/"+fileToSave.getName();
 							    if(fileToSave1.getName().endsWith("png") || fileToSave1.getName().endsWith("jpg") || fileToSave1.getName().endsWith("bmp"))
 							    {
 							    	if(selection == "Additive Cipher")
@@ -260,7 +263,7 @@ public class Tabbedpane
 											e.printStackTrace();
 										}
 								    	
-								    	String newpath ="/home/mandar/Encrypted_Files/"+fileToSave.getName(); 
+								    	String newpath ="/home/nahush/Encrypted_Files/"+fileToSave.getName(); 
 										System.out.println("newpath: "+newpath);
 								    	RandomAccessFile encryptedFile;
 										try 
@@ -277,7 +280,7 @@ public class Tabbedpane
 								    {
 								    		try{
 								    		Rot13.encrypt(new File(filepath)); 
-								    		String newpath ="/home/mandar/Encrypted_Files/"+fileToSave.getName(); 
+								    		String newpath ="/home/nahush/Encrypted_Files/"+fileToSave.getName(); 
 								    		System.out.println("newpath: "+newpath);
 								    		RandomAccessFile encryptedFile = new RandomAccessFile(newpath,"rw");
 								    		temporary.init(fileToSave1.getAbsolutePath(),encryptedFile);
@@ -302,7 +305,7 @@ public class Tabbedpane
 					    }
 						else
 						{
-							  JOptionPane.showMessageDialog(null, "You are not authorised to ENCRYPT this file");
+							  JOptionPane.showMessageDialog(null, "You are not authorised to encrypt this file");
 							  frame.dispose();
 							  Tabbedpane obj1 = new Tabbedpane();
 							  obj1.init(userid);

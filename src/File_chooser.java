@@ -24,7 +24,7 @@ public class File_chooser{
 			  		  
 			  if(choice == 1){ 
 				  
-				  File new1 = new File("/home/mandar/Files_Uploaded/"+userid + fileToSave.getName());
+				  File new1 = new File("/home/nahush/Files_Uploaded/"+userid + fileToSave.getName());
 				  FileInputStream is = new FileInputStream(fileToSave);
 				  FileOutputStream os = new FileOutputStream(new1);
 				  byte[] buffer = new byte[(int)fileToSave.length()];
@@ -75,6 +75,10 @@ public class File_chooser{
 				
 				e.printStackTrace();
 			}
+		}
+		else if (userSelection == JFileChooser.CANCEL_OPTION)
+		{
+			return null;
 		}
 		parentFrame.setLayout(null);
 		parentFrame.add(fileChooser);
