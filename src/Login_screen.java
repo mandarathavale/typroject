@@ -133,7 +133,7 @@ public class Login_screen {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				boolean flag = false;
+				//boolean flag = false;
 			
 				String st1 = login.getText();
 				String st2 = passwd.getText();

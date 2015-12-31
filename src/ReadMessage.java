@@ -1,8 +1,5 @@
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.awt.Color;
-import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 
 class ReadMessage
@@ -11,7 +8,7 @@ class ReadMessage
 	{
 	
 		File image = new File(img);
-		int v = 0, cnt=1,k=0,result;
+		int v = 0, k=0,result;
 		BufferedImage bimg = null;
 		RandomAccessFile newfile = new RandomAccessFile("/home/mandar/AfterSteg/new.txt","rw");
 		

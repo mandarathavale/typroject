@@ -40,10 +40,10 @@ public class Keyaddition1 {
 public static void main(String[] args) {
 		
 		
-		Keyaddition1 obj = new Keyaddition1();
+		//Keyaddition1 obj = new Keyaddition1();
 		try {
 			
-				obj.init("/home/nahush/Dec/test.txt");
+				Keyaddition1.init("/home/nahush/Dec/test.txt");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,9 +70,9 @@ public static void main(String[] args) {
 			e.printStackTrace();
 		}
 		
-		File normalText = new File(fname);
-		String efname = "/home/nahush/Enc"+normalText.getName();
-		File encryptedText = new File(efname);
+	//	File normalText = new File(fname);
+	//	String efname = "/home/nahush/Enc"+normalText.getName();
+	//	File encryptedText = new File(efname);
 	//	encrypt(normalText,key);
 	//	decrypt(encryptedText,key);
 	}
@@ -219,5 +219,6 @@ public static void main(String[] args) {
 		obj.close();
 		//System.exit(0);
 		//br.close();
+		file1.close();
 	}
 }

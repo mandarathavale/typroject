@@ -28,14 +28,14 @@ public class Forgot_pass {
 		frame.setBounds(0,0,screenSize.width, screenSize.height);
 		frame.setLayout(null);  
 		
-		DefaultComboBoxModel securityq = new DefaultComboBoxModel();
+		DefaultComboBoxModel<String> securityq = new DefaultComboBoxModel<String>();
 
 	      securityq.addElement("What was your first school?");
 	      securityq.addElement("What was the name of your first pet?");
 	      securityq.addElement("What was you mother's maiden name?");
 	      securityq.addElement("Where were you born?");
 
-	      final JComboBox securityQ = new JComboBox(securityq);
+	      final JComboBox<String> securityQ = new JComboBox<String>(securityq);
 	      p1 = new JPanel();
 	      p1.setLayout(null);
 	      
@@ -160,7 +160,7 @@ public class Forgot_pass {
 					else
 					{
 						JOptionPane.showMessageDialog(null,"Login not successful");
-						Login_screen obj = new Login_screen();
+						//Login_screen obj = new Login_screen();
 						frame.dispose();    
 					}
 				}

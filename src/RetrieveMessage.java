@@ -13,7 +13,6 @@ public class RetrieveMessage {
 		File image = new File(args[0]);
 		BufferedImage bimg = ImageIO.read(image);
 		
-		String pixel[][] = new String[bimg.getWidth()][bimg.getHeight()];
 		for(int i=0; i<bimg.getWidth(); i++)
 		{
 			for(int j=0; j<bimg.getHeight(); j++)

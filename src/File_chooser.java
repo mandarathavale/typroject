@@ -1,8 +1,6 @@
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.*;
 
 public class File_chooser{
@@ -18,7 +16,7 @@ public class File_chooser{
 		String path = new String();
 		int userSelection = fileChooser.showOpenDialog(null);
 		 
-		String userid1 = ""+userid;
+		//String userid1 = ""+userid;
 		
 		if (userSelection == JFileChooser.APPROVE_OPTION) 
 		{
@@ -158,7 +156,7 @@ public class File_chooser{
 				    //System.out.println(selection);
 				    
 					  JOptionPane.showMessageDialog(null, "Are you sure???");
-					  JOptionPane optionPane = new JOptionPane("Continue printing?", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
+					  //JOptionPane optionPane = new JOptionPane("Continue printing?", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
 					  
 					  File encrypted = ReadMessage.init(fileToSave.getAbsolutePath());
 					  
@@ -173,8 +171,7 @@ public class File_chooser{
 						return fileToSave.getAbsolutePath();
 					  }
 					  else{
-				    	Rot13 obj = new Rot13();
-				    	obj.decrypt(encrypted);
+				    	Rot13.decrypt(encrypted);
 				    	 return fileToSave.getAbsolutePath();
 					  }
 				    }
@@ -200,7 +197,7 @@ public class File_chooser{
 		
 		
 		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		//parentFrame.setBounds(0,0,screenSize.width, screenSize.height);
 		parentFrame.setLayout(null);
 		parentFrame.add(fileChooser);

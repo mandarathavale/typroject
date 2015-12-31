@@ -5,13 +5,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.swing.*;
 public class Tabbedpane 
 {
@@ -20,8 +17,8 @@ public class Tabbedpane
 		JTextField filepath,encryptpath,decryptpath,deletepath;
 		JFrame frame;
 		String path = new String();
-		DefaultListModel list1,list2;
-		JList jlist1,jlist2;
+		DefaultListModel<String> list1,list2;
+		JList<String> jlist1,jlist2;
 		DBManager1 DB = new DBManager1();
 		public void init(final int userid)
 		{
@@ -55,8 +52,8 @@ public class Tabbedpane
 				
 				query="select filename from filetab1 where userid='"+userid+"'";
 				rs = db1.fetchQuery(query);
-				list1 = new DefaultListModel();
-				list2 = new DefaultListModel();
+				list1 = new DefaultListModel<String>();
+				list2 = new DefaultListModel<String>();
 				//int cnt=1;
 				if(rs.next())
 				{	
@@ -73,9 +70,9 @@ public class Tabbedpane
 					list2.addElement(name);
 					
 				}
-				jlist1 = new JList(list1);
+				jlist1 = new JList<String>(list1);
 				jlist1.setVisibleRowCount(8);
-				jlist2 = new JList(list2);
+				jlist2 = new JList<String>(list2);
 				jlist2.setVisibleRowCount(8);
 	    	}
 	    	catch(Exception e)
@@ -258,8 +255,7 @@ public class Tabbedpane
 					    					    
 						  	JOptionPane.showMessageDialog(null, "Remember your choice for Decryption!!!");
 						    JOptionPane.showMessageDialog(null, "Upload Image for data hiding now...");
-						    JFrame parentFrame1 = new JFrame();
-							JFileChooser fileChooser1 = new JFileChooser();
+						    JFileChooser fileChooser1 = new JFileChooser();
 							fileChooser1.setDialogTitle("Upload a file to directory");   
 						
 							int userSelection1 = fileChooser1.showOpenDialog(null);

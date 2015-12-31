@@ -15,7 +15,7 @@ public class Signup_form{
 	JLabel name1,email1,userid1,passwd,passwd1,signup,sec,ans,answererror_label,nameerror_label,usernameerror_label,emailerror_label,passworderror_label,passconform_label,submiterror_label,reseterror_label;
 ;
 	JButton submit,reset,back;
-	JComboBox securityQ;
+	JComboBox<String> securityQ;
 	JPasswordField pass,pass1;
 	JFrame frame;
 	DBManager1 DB = new DBManager1();
@@ -79,14 +79,14 @@ public class Signup_form{
 		sec = new JLabel("Choose your security question: ");
 		back = new JButton("Back");
 				
-		DefaultComboBoxModel securityq = new DefaultComboBoxModel();
+		DefaultComboBoxModel<String> securityq = new DefaultComboBoxModel<String>();
 
 	      securityq.addElement("What was your first school?");
 	      securityq.addElement("What was the name of your first pet?");
 	      securityq.addElement("What was you mother's maiden name?");
 	      securityq.addElement("Where were you born?");
 
-	      securityQ = new JComboBox(securityq);
+	      securityQ = new JComboBox<String>(securityq);
 
 		
 		signup.setBounds(0,0,200,50);
