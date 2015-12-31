@@ -108,7 +108,6 @@ public class DBManager1
 	}
 	
 	
-
 	public int updateRecord(String query)
 	{
 		try
@@ -130,7 +129,6 @@ public class DBManager1
 	}
 	
 	
-	
 	public void deleteRecord(String query)
 	{
 		try
@@ -143,106 +141,6 @@ public class DBManager1
 			System.out.println("Exception in deleteRecord"+e.getMessage());
 		}	
 	}
-	
-	public ResultSet getDataForTable()
-	{
-			ResultSet result = null;
-			try
-			{
-				result=st.executeQuery("select * from book");
-				return result;
-			}
-			catch(SQLException e)
-			{
-				System.out.println(e.getMessage());
-			}
-			return result;
-	}
-	
-	public ResultSet getDataForTable1(String user_name)
-	{
-		String user=user_name;
-			ResultSet result = null;
-			try
-			{
-				result=st.executeQuery("select * from newspaper where uploaded_by='"+user+"'");
-				return result;
-			}
-			catch(SQLException e)
-			{
-				System.out.println(e.getMessage());
-			}
-			return result;
-	}
-	public ResultSet getDataForTable2(String user_name)
-	{
-		String user=user_name;
-			ResultSet result = null;
-			try
-			{
-				result=st.executeQuery("select s_id,s_first_name,s_last_name from student where username='"+user+"'");
-				return result;
-			}
-			catch(SQLException e)
-			{
-				System.out.println(e.getMessage());
-			}
-			return result;
-	}
-	
-	public boolean delete1(int pkey)
-	{
-		PreparedStatement ps;
-		try {
-			ps = this.con.prepareStatement("delete from book where book_id=?;");
-			System.out.println(pkey);
-		ps.setInt(1,pkey);
-		ps.executeUpdate();
-		return true;
-			} catch (SQLException ae) {
-			// TODO Auto-generated catch block
-			ae.printStackTrace();
-		}
-		return false;
-	}
-
-	public boolean delete2(int pkey)
-	{
-		PreparedStatement ps;
-		try 
-		{
-			ps = this.con.prepareStatement("delete from student where s_id=?;");
-			System.out.println(pkey);
-			ps.setInt(1,pkey);
-			ps.executeUpdate();
-			return true;
-		} 
-		catch (SQLException ae) 
-		{
-			ae.printStackTrace();
-			
-		}
-		return false;
-		
-	}
-	public boolean delete3(int pkey)
-	{
-		PreparedStatement ps;
-		try {
-			ps = this.con.prepareStatement("delete from newspaper where news_id=?;");
-			System.out.println(pkey);
-		ps.setInt(1,pkey);
-		ps.executeUpdate();
-		return true;
-			} catch (SQLException ae) {
-			// TODO Auto-generated catch block
-			ae.printStackTrace();
-			
-		}
-		return false;
-		
-	}
-
 
 	public void closeConnection()
 	{

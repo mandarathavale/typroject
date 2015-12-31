@@ -38,28 +38,7 @@ public class Keyaddition1 {
 	
 	
 	
-	public static void main(String[] args) {
-		
-		
-		Keyaddition1 obj = new Keyaddition1();
-		try {
-			
-				obj.init("/home/mandar/Files/file.txt");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	/*	File normalText = new File("/home/mandar/workspace/Cryptography/src/file.txt");
-		File encryptedText = new File("/home/mandar/Encrypted_Files/file.txt");
-		encrypt(normalText,key);
-		decrypt(encryptedText,key);*/
-		
-		
-		
-	}
-
-	public static void init(String fname) throws Exception{
+public static void init(String fname) throws Exception{
 		
 		//String normalfname
 		System.out.println("Enter the key: ");
@@ -195,7 +174,7 @@ public class Keyaddition1 {
 						j = 0;
 				}
 				
-				//System.out.println(newKey);
+				System.out.println(newKey);
 					
 				for(int i =0 ;i<encryptedText.length();i++){
 						char temp = (char)(encryptedText.charAt(i)-newKey.charAt(i));

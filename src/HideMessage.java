@@ -1,4 +1,4 @@
-import java.awt.Image;
+/*import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -62,3 +62,4 @@ public class HideMessage {
 		
 	}
 }
+*/

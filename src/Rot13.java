@@ -43,9 +43,11 @@ public class Rot13 {
 		char c;
 		/*StringBuffer object used for fast and more memory efficient 
 		concatination within loop*/
+		System.out.println("ROT13 decrypt");
 		StringBuilder sb = new StringBuilder();
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line = br.readLine();
+		System.out.println(line);
 		//read the text file line by line
 		while (line != null) {
 			for(int i = 0; i < line.length(); i++)
@@ -80,10 +82,5 @@ public class Rot13 {
 		File encryptedText = new File(efname);
 		encrypt(normalText);
 		decrypt(encryptedText);
-	}
-	
-	public static void main(String[] args) throws IOException {
-		Rot13 obj = new Rot13();
-		obj.init("/home/mandar/Files/file1.txt");
 	}
 }

@@ -5,12 +5,13 @@ import java.io.RandomAccessFile;
 public class ASCII {
 
 	//converts the text in the specified file to its binary equivalent 
-	public static String encode(String filepath) throws IOException
+	public static String encode(RandomAccessFile filepath) throws IOException
 	{
 		StringBuilder binaryString = new StringBuilder(); 
-		RandomAccessFile file = new RandomAccessFile(filepath,"rw");
-		byte[] bytes = new byte[(int) file.length()];
-		file.readFully(bytes);
+		//RandomAccessFile file = new RandomAccessFile(filepath,"rw");
+		
+		byte[] bytes = new byte[(int) filepath.length()];
+		filepath.readFully(bytes);
 		//iterate loop for all characters in the text file
 		for(byte b : bytes)
 		{
@@ -24,7 +25,8 @@ public class ASCII {
 				val <<= 1;
 			}	
 		}
-		file.close();
+		filepath.close();
+		binaryString.append("00100011");
 		//System.out.println(binaryString.toString());
 		return binaryString.toString();	
 	}
@@ -50,9 +52,5 @@ public class ASCII {
 		return normalString;
 	}
 	
-	public static void main(String[] args) throws IOException {
-		//System.out.println(ASCII.decode(ASCII.encode("/home/mandar/workspace/Cryptography/src/file.txt")));
-		System.out.println(ASCII.encode("/home/mandar/workspace/Cryptography/src/file.txt"));
-		System.out.println(ASCII.decode("01010010"));
-	}
+	
 }

@@ -268,12 +268,6 @@ public class Forgot_pass {
 	      //this.dispose();
 
 	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-		Forgot_pass obj = new Forgot_pass();
-		obj.init();
-	}
 
 }

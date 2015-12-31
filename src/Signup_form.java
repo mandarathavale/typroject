@@ -347,11 +347,4 @@ public class Signup_form{
 	
 	
 	}
-	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		Signup_form obj = new Signup_form();
-		obj.init();
-	}
-	
-
 }

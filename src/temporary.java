@@ -4,14 +4,21 @@ import javax.imageio.ImageIO;
 // parameters are: image path, message file path
 public class temporary {
 
-	public static void main(String[] args) throws IOException 
-	{
+	public static void init(String imagepath,RandomAccessFile filepath) throws IOException{
 		StringBuilder binaryBlue;
 		String binaryString;
-		File image = new File(args[0]);
+		
+		String array[] = imagepath.split("/");
+		System.out.println(array[array.length-1]);
+		String imagename1 = array[array.length-1];
+		array = imagename1.split("\\.");
+		System.out.println(array[array.length-1]);
+		
+		File image = new File(imagepath);
 		BufferedImage bimg = ImageIO.read(image);
 		String pixel[][] = new String[bimg.getWidth()][bimg.getHeight()];
-		binaryString = ASCII.encode(args[1]);
+		//RandomAccessFile msgfile = new RandomAccessFile(filepath,"rw");
+		binaryString = ASCII.encode(filepath);
 		//BufferedImage dest = new BufferedImage(bimg.getWidth(),bimg.getHeight(),bimg.getType());
 		BufferedImage dest = new BufferedImage(bimg.getWidth(),bimg.getHeight(),BufferedImage.TYPE_3BYTE_BGR);
 		RandomAccessFile obj1 = new RandomAccessFile("after.txt","rw");
@@ -51,7 +58,8 @@ public class temporary {
 			}
 		}
 		obj1.close();
-		image = new File("imagefile.png");
-		ImageIO.write(dest, "png", image);
-		}
+		
+		image = new File("/home/mandar/Steg/"+imagename1);
+		ImageIO.write(dest, array[array.length-1], image);
 	}
+}

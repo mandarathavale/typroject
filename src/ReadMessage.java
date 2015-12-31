@@ -1,20 +1,27 @@
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.awt.Color;
+import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 
 class ReadMessage
 {
-	public static void readMessage(String fname) throws IOException
+	public static File init(String img) throws IOException
 	{
-		RandomAccessFile encrypted = new RandomAccessFile("/home/mandar/AfterSteg/temp.txt","rw");
-		File image = new File(fname);
-		int v = 0,k=0,result;
+	
+		File image = new File(img);
+		int v = 0, cnt=1,k=0,result;
 		BufferedImage bimg = null;
+		RandomAccessFile newfile = new RandomAccessFile("/home/mandar/AfterSteg/new.txt","rw");
+		
+		
 		try
 		{
 			bimg = ImageIO.read(image);
 		} catch(Exception e) { e.printStackTrace(); }
 		
+		label:
 		for(int i=0; i<bimg.getWidth(); i++)
 		{
 			for(int j=0; j<bimg.getHeight(); j++)
@@ -30,27 +37,26 @@ class ReadMessage
 					k=0;
 					if((char)v == '#')
 					{
-						System.out.println("END");
-						System.exit(0);
+						break label;
 					}
-					else{
-						String a = ""+(char)v;
-						encrypted.writeChars(a);
-						System.out.print((char) v);
-						v = 0;
-					}
+									
 					
+					else
+					{
+						System.out.println((char) v);
+						//newfile.writeChar(v);
+						String s = ""+(char)v;
+						newfile.writeBytes(s);
+						v = 0;
+						
+					}
+					//try { Thread.sleep(500); } catch(Exception e) { }
 				}
 			}
 		}
-		encrypted.close();
-		System.out.println("END");;
+		newfile.close();
+		return(new File("/home/mandar/AfterSteg/new.txt"));
 
 	}
 	
-	
-	public static void main(String[] args) throws IOException
-	{
-		readMessage(args[0]);
-	}
 }

@@ -3,18 +3,24 @@ import java.io.*;
 import javax.imageio.ImageIO;
 public class WriteMessage
 {
-	public static void writeMessage(String args,String message) throws IOException{
+	public static void writeMessage(String imagename,String message) throws IOException{
 		
-		
-		File image = new File(args);
+		int tempcnt=0;
+		File image = new File(imagename);
 		BufferedImage bimg = ImageIO.read(image);
 		BufferedImage dest = new BufferedImage(bimg.getWidth(), bimg.getHeight(), bimg.getType());
 		dest.getGraphics().drawImage(bimg, 0, 0, null);
+		
+		
+		String array[] = imagename.split("/");
+		String imagename1 = array[array.length-1];
+		array = imagename1.split("\\.");
 		//String msg = "Mandar Athavale#";
-		System.out.println(message);
+		//System.out.println(message);
 		String msg = message+"#";
-		System.out.println(msg);
-		System.out.println("len: "+msg.length());
+		System.out.println("MSG: "+msg);
+		//System.out.println(msg);
+		//System.out.println("len: "+msg.length());
 		int m;
 		int k = 0, v, p=7, result=0;
 		
@@ -34,7 +40,9 @@ public class WriteMessage
 							if( (result & 1) != 0 )
 								result ^= 1;
 						}
+						//System.out.println(result);
 						dest.setRGB(i, j, result);
+						tempcnt++;
 						p--;
 						if( p==-1 )
 						{
@@ -47,16 +55,18 @@ public class WriteMessage
 				{
 					result = dest.getRGB(i, j);
 					dest.setRGB(i, j, result);
+					
 				} 
 			}
 		}
 		try 
 		{ 
 			System.out.println("In WRITE");
-			image = new File("/home/mandar/workspace/Cryptography/d.png");
-			ImageIO.write(dest, "png", image); 
+			image = new File("/home/mandar/Steg/"+imagename1);
+			ImageIO.write(dest, array[array.length-1], image); 
 		} catch(Exception e) { e.printStackTrace(); }
-
+		
+		System.out.println("cnt"+tempcnt);
 	}
 	
 	public static void main(String[] args) throws IOException 

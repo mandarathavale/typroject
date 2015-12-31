@@ -27,14 +27,7 @@ public class File_chooser{
 		    //System.out.println(fileToSave.getAbsolutePath());
 		    path = fileChooser.getSelectedFile().getAbsolutePath();
 		  try {
-			  		/*Files.copy(fileToSave.toPath(),	
-			  				(new File("D:\\Movies\\Files" + fileToSave.getName())).toPath(),
-			  				StandardCopyOption.REPLACE_EXISTING);
-		   
-			  
-			  if(fileToSave.renameTo(new File("D:\\Movies\\Files\\" + fileToSave.getName())))
-		    		System.out.println("File is moved successful!");*/
-			  
+			  		  
 			 
 			  if(choice == 1){ 
 				  File new1 = new File("/home/mandar/Files_Uploaded/"+userid + fileToSave.getName());
@@ -55,11 +48,13 @@ public class File_chooser{
 				  return fileToSave.getAbsolutePath();
 			  }
 			  
-			  if(choice == 2){
+			/*  if(choice == 2){
 				
 				  if(fileToSave.getName().startsWith(userid1))
 				  {
 					  if(fileToSave.delete() == true){
+						  
+						  
 						  JOptionPane.showMessageDialog(null, "Deleted Succesfully");
 						  return fileToSave.getAbsolutePath();
 					  }
@@ -69,25 +64,27 @@ public class File_chooser{
 					  JOptionPane.showMessageDialog(null, "You are not authorised to delete this file");
 					  return "FAILED";
 				  }
-			  }
+			  }*/
 			  
-			  if(choice == 3){
+			  /*if(choice == 3){
+				  
+				  
 				  
 				  if(fileToSave.getName().startsWith(userid1))
 				    {
-				  Object[] selectionValues = { "Additive Cipher", "Caesar Cipher" };
-				    String initialSelection = "Additive Cipher";
-				    Object selection = JOptionPane.showInputDialog(null, "Please choose algorithm?",
+				 
+					  Object[] selectionValues = { "Additive Cipher", "Caesar Cipher" };
+					  String initialSelection = "Additive Cipher";
+					  Object selection = JOptionPane.showInputDialog(null, "Please choose algorithm?",
 				        "Algorithm Selection", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
 				    //System.out.println(selection);
 				    
 				    JOptionPane.showMessageDialog(null, "Remember your choice for Decryption!!!");
-				    
+				    JOptionPane.showMessageDialog(null, "Upload Image for data hiding now...");
 				    JFrame parentFrame1 = new JFrame();
 					JFileChooser fileChooser1 = new JFileChooser();
 					fileChooser1.setDialogTitle("Upload a file to directory");   
-					//String path = new String();
-					JOptionPane.showMessageDialog(null, "Upload Image for data hiding now...");
+					
 					int userSelection1 = fileChooser1.showOpenDialog(null);
 				   
 					if (userSelection1 == JFileChooser.APPROVE_OPTION) 
@@ -95,7 +92,7 @@ public class File_chooser{
 					    File fileToSave1 = fileChooser1.getSelectedFile();
 					    
 					    if(fileToSave1.getName().endsWith("png") || fileToSave1.getName().endsWith("jpg") || fileToSave1.getName().endsWith("bmp")){
-					    	System.out.println("true");
+					    	//System.out.println("true");
 					    	
 					    	
 					    	
@@ -108,13 +105,13 @@ public class File_chooser{
 						    	String newpath ="/home/mandar/Encrypted_Files/"+fileToSave.getName(); 
 								System.out.println("newpath: "+newpath);
 						    	RandomAccessFile encryptedFile = new RandomAccessFile(newpath,"rw");
-								byte b[] = new byte[(int) encryptedFile.length()];
-								encryptedFile.readFully(b);
-								encryptedFile.close();
-								String tempo = new String(b);
-								System.out.println("tempo"+tempo);
-								WriteMessage.writeMessage(fileToSave1.getAbsolutePath(),tempo);
-								
+								//byte b[] = new byte[(int) encryptedFile.length()];
+								//encryptedFile.readFully(b);
+								//encryptedFile.close();
+								//String tempo = new String(b);
+								//System.out.println("tempo"+tempo);
+								//WriteMessage.writeMessage(fileToSave1.getAbsolutePath(),tempo);
+								temporary.init(fileToSave1.getAbsolutePath(),encryptedFile);
 								return fileToSave.getAbsolutePath();
 						    }
 						    
@@ -125,13 +122,13 @@ public class File_chooser{
 						    	String newpath ="/home/mandar/Encrypted_Files/"+fileToSave.getName(); 
 								System.out.println("newpath: "+newpath);
 						    	RandomAccessFile encryptedFile = new RandomAccessFile(newpath,"rw");
-								byte b[] = new byte[(int) encryptedFile.length()];
-								encryptedFile.readFully(b);
-								encryptedFile.close();
-								String tempo = new String(b);
-								System.out.println("tempo"+tempo);
-								WriteMessage.writeMessage(fileToSave1.getAbsolutePath(),tempo);
-
+								//byte b[] = new byte[(int) encryptedFile.length()];
+								//encryptedFile.readFully(b);
+								
+								//String tempo = new String(b);
+								//System.out.println("tempo"+tempo);
+								//WriteMessage.writeMessage(fileToSave1.getAbsolutePath(),tempo);
+								temporary.init(fileToSave1.getAbsolutePath(),encryptedFile);
 						    	return fileToSave.getAbsolutePath();
 						    }
 					}
@@ -148,52 +145,43 @@ public class File_chooser{
 						  JOptionPane.showMessageDialog(null, "You are not authorised to ENCRYPT this file");
 						  return "FAILED";
 					}
-			  }
+			  }*/
 			  
 			  if(choice == 4){
 				  
-				  if(fileToSave.getName().startsWith(userid1))
+				  if(fileToSave.getName().endsWith("jpg") || fileToSave.getName().endsWith("png") || fileToSave.getName().endsWith("bmp") )
 				    {
-				  Object[] selectionValues = { "Additive Cipher", "Caesar Cipher" };
-				    String initialSelection = "Additive Cipher";
-				    Object selection = JOptionPane.showInputDialog(null, "Please choose algorithm?",
+					  Object[] selectionValues = { "Additive Cipher", "Caesar Cipher" };
+					  String initialSelection = "Additive Cipher";
+					  Object selection = JOptionPane.showInputDialog(null, "Please choose algorithm?",
 				        "Algorithm Selection", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
 				    //System.out.println(selection);
 				    
-				    JOptionPane.showMessageDialog(null, "Are you sure???");
-				    JOptionPane optionPane = new JOptionPane("Continue printing?", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
-				    
-				    
-				    	if(selection == "Additive Cipher"){
+					  JOptionPane.showMessageDialog(null, "Are you sure???");
+					  JOptionPane optionPane = new JOptionPane("Continue printing?", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
+					  
+					  File encrypted = ReadMessage.init(fileToSave.getAbsolutePath());
+					  
+					  if(selection == "Additive Cipher"){
 				    
 				    	Keyaddition1 obj = new Keyaddition1();
 				    	
 				    	Object result = JOptionPane.showInputDialog(null, "Enter Key", "Enter key");
 						key = result.toString();
 				    	
-				    	//System.out.println("Enter the key: ");
-						//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-						/*try {
-							key = br.readLine();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							
-							e.printStackTrace();
-						}*/
-				    	//obj.init(fileToSave.getAbsolutePath());
-				    	obj.decrypt(fileToSave,key);
+				    	obj.decrypt(encrypted,key);
 						return fileToSave.getAbsolutePath();
-				    }
-				    else{
+					  }
+					  else{
 				    	Rot13 obj = new Rot13();
-				    	obj.decrypt(fileToSave);
+				    	obj.decrypt(encrypted);
 				    	 return fileToSave.getAbsolutePath();
-				    }
+					  }
 				    }
 				    
 				    else
 				    {
-				    	JOptionPane.showMessageDialog(null, "You are not authorised to Decrypt this file");
+				    	JOptionPane.showMessageDialog(null, "This file is not an image");
 						  return "FAILED";
 				    }
 				    
@@ -221,9 +209,5 @@ public class File_chooser{
 		parentFrame.dispose();
 		return path;
 	}
-	public static void main(String[] args)
-	{
-		File_chooser obj = new File_chooser();
-		//obj.init(3);
-	}
+	
 }

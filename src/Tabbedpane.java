@@ -4,9 +4,14 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.*;
 public class Tabbedpane 
 {
@@ -15,7 +20,8 @@ public class Tabbedpane
 		JTextField filepath,encryptpath,decryptpath,deletepath;
 		JFrame frame;
 		String path = new String();
-		
+		DefaultListModel list1,list2;
+		JList jlist1,jlist2;
 		DBManager1 DB = new DBManager1();
 		public void init(final int userid)
 		{
@@ -45,11 +51,41 @@ public class Tabbedpane
 					username.setForeground(Color.CYAN);
 					username.setBounds(0, 20, 1000, 35);
 				}
+				
+				
+				query="select filename from filetab1 where userid='"+userid+"'";
+				rs = db1.fetchQuery(query);
+				list1 = new DefaultListModel();
+				list2 = new DefaultListModel();
+				//int cnt=1;
+				if(rs.next())
+				{	
+					//System.out.println(rs.getString(columnIndex));
+					while(!rs.isLast())
+					{
+						name = rs.getString(1);
+						list1.addElement(name);
+						list2.addElement(name);
+						rs.next();
+					}
+					name = rs.getString(1);
+					list1.addElement(name);
+					list2.addElement(name);
+					
+				}
+				jlist1 = new JList(list1);
+				jlist1.setVisibleRowCount(8);
+				jlist2 = new JList(list2);
+				jlist2.setVisibleRowCount(8);
 	    	}
 	    	catch(Exception e)
 	    	{
 	    		e.printStackTrace();
 	    	}
+	    	
+	    	JScrollPane scrollPane1 = new JScrollPane(jlist1);
+	    	JScrollPane scrollPane2 = new JScrollPane(jlist2);
+	    	
 	    	b1 = new JButton("Encrypt File");
 	        b2 = new JButton("Upload File");
 	        b3 = new JButton("Decrypt File");
@@ -85,6 +121,9 @@ public class Tabbedpane
 	        decryptpath.setBounds(350, 300, 300, 20);
 	        deletepath.setBounds(350,300,300,20);
 	        
+	        scrollPane1.setBounds(350, 350, 300, 100);
+	        scrollPane2.setBounds(350, 150, 300, 100);
+	        
 	        frame.getContentPane().add(jtp);
 	    	
 	    	JPanel jp1 = new JPanel();
@@ -107,6 +146,8 @@ public class Tabbedpane
 	        jp1.add(b4);
 	        jp1.add(deletepath);
 	        jp1.add(l4);
+	        jp1.add(scrollPane1);
+	        jp2.add(scrollPane2);
 	        p1.add(logout);
 	        p1.add(username);
 	        b2.addActionListener(new ActionListener() 
@@ -143,7 +184,11 @@ public class Tabbedpane
 						if(num>0)
 						{
 							JOptionPane.showMessageDialog(null, "Upload Successfull");
-							//frame.dispose();
+							DB.closeConnection();
+							frame.dispose();
+							Tabbedpane obj1 = new Tabbedpane();
+							obj1.init(userid);
+							
 							//Login_screen obj = new Login_screen();
 							//obj.init();
 						}
@@ -166,21 +211,131 @@ public class Tabbedpane
 				public void actionPerformed(ActionEvent arg0) 
 				{
 					// TODO Auto-generated method stub
-					File_chooser obj = new File_chooser();
-					path = obj.init(2,userid);
-					deletepath.setText(path);
+					String name = (String) jlist1.getSelectedValue();
+					String fname = "/home/mandar/Files_Uploaded/"+name;
+					System.out.println(fname);
+					
+					File file = new File(fname);
+					
+					if(file.delete() == true)
+					{
+						DBManager1 temp = new DBManager1();
+						temp.loader();
+						temp.getConnection();
+						String query="delete from filetab1 where filename='"+name+"'";
+						temp.deleteRecord(query);
+						//deletepath.setText(path);
+						temp.closeConnection();
+						frame.dispose();
+						Tabbedpane obj1 = new Tabbedpane();
+						obj1.init(userid);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "You are not authorised to delete this file");
+					}
+					
 				}
 			});
+	        
+	        
 	        b1.addActionListener(new ActionListener() 
 	        {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					// TODO Auto-generated method stub
-					File_chooser obj = new File_chooser();
-					path = obj.init(3,userid);
-					encryptpath.setText(path);
+					
+					String name = (String) jlist2.getSelectedValue();
+					File fileToSave = new File(name);
+					
+					 if(fileToSave.getName().startsWith(""+userid))
+					    {
+					 
+						  	Object[] selectionValues = { "Additive Cipher", "Caesar Cipher" };
+						  	String initialSelection = "Additive Cipher";
+						  	Object selection = JOptionPane.showInputDialog(null, "Please choose algorithm?",
+					        "Algorithm Selection", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+					    					    
+						  	JOptionPane.showMessageDialog(null, "Remember your choice for Decryption!!!");
+						    JOptionPane.showMessageDialog(null, "Upload Image for data hiding now...");
+						    JFrame parentFrame1 = new JFrame();
+							JFileChooser fileChooser1 = new JFileChooser();
+							fileChooser1.setDialogTitle("Upload a file to directory");   
+						
+							int userSelection1 = fileChooser1.showOpenDialog(null);
+					   
+							if (userSelection1 == JFileChooser.APPROVE_OPTION) 
+							{
+							    File fileToSave1 = fileChooser1.getSelectedFile();
+							    String filepath = "/home/mandar/Files_Uploaded/"+fileToSave.getName();
+							    if(fileToSave1.getName().endsWith("png") || fileToSave1.getName().endsWith("jpg") || fileToSave1.getName().endsWith("bmp"))
+							    {
+							    	if(selection == "Additive Cipher")
+							    	{
+							    		
+								    	Keyaddition1 obj = new Keyaddition1();
+								    	Object result = JOptionPane.showInputDialog(null, "Enter Key", "Enter key");
+										String key = result.toString();
+								    	try {
+											obj.encrypt(new File(filepath),key);
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+								    	
+								    	String newpath ="/home/mandar/Encrypted_Files/"+fileToSave.getName(); 
+										System.out.println("newpath: "+newpath);
+								    	RandomAccessFile encryptedFile;
+										try 
+										{
+											encryptedFile = new RandomAccessFile(newpath,"rw");
+											temporary.init(fileToSave1.getAbsolutePath(),encryptedFile);
+										} 
+										catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}
+								    
+								    else
+								    {
+								    		try{
+								    		Rot13.encrypt(new File(filepath)); 
+								    		String newpath ="/home/mandar/Encrypted_Files/"+fileToSave.getName(); 
+								    		System.out.println("newpath: "+newpath);
+								    		RandomAccessFile encryptedFile = new RandomAccessFile(newpath,"rw");
+								    		temporary.init(fileToSave1.getAbsolutePath(),encryptedFile);
+								    		}
+								    		catch(Exception e)
+								    		{
+								    			e.printStackTrace();
+								    		}
+								    }
+							    }
+							    
+							    else
+							    {
+							    	JOptionPane.showMessageDialog(null, "This format is not supported for an image");
+							    	frame.dispose();
+									Tabbedpane obj1 = new Tabbedpane();
+									obj1.init(userid);
+	
+							    }
+							
+							}
+					    }
+						else
+						{
+							  JOptionPane.showMessageDialog(null, "You are not authorised to ENCRYPT this file");
+							  frame.dispose();
+							  Tabbedpane obj1 = new Tabbedpane();
+							  obj1.init(userid);
+
+						}
 				}
 			});
+	        
+	        
 	        b3.addActionListener(new ActionListener() 
 	        {
 				@Override
@@ -190,6 +345,10 @@ public class Tabbedpane
 					File_chooser obj = new File_chooser();
 					path = obj.init(4,userid);
 					decryptpath.setText(path);
+					frame.dispose();
+					Tabbedpane obj1 = new Tabbedpane();
+					obj1.init(userid);
+					
 				}
 			});
 	        
@@ -221,10 +380,5 @@ public class Tabbedpane
 	        frame.setVisible(true);
 	    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	     }
-		
-		public static void main(String[] args) throws IOException 
-		{
-			Tabbedpane tp = new Tabbedpane();
-			 tp.init(1);
-		} 
+
 }
