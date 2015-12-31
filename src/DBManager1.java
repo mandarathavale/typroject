@@ -1,8 +1,6 @@
-//package DBManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-//import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBManager1 
@@ -14,7 +12,6 @@ public class DBManager1
 	{
 		try
 		{
-			//Class.forName("com.mysql.jdbc.Driver");
 			Class.forName("org.postgresql.Driver");
 		}
 		catch(Exception e)
@@ -27,9 +24,7 @@ public class DBManager1
 	{
 		try
 		{
-			//con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Test","root","mysql");
 			con=DriverManager.getConnection("jdbc:postgresql:test","mandar","mandar");
-			//DriverManager.get
 			st=con.createStatement();
 		}
 		catch(Exception e)

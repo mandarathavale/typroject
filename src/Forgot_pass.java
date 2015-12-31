@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class Forgot_pass {
 	
 	JLabel l1,l2,l3,l4,l5,l6,passworderror_label,passworderror_label1;
@@ -39,7 +38,6 @@ public class Forgot_pass {
 	      p1 = new JPanel();
 	      p1.setLayout(null);
 	      
-	      
 	      l1 = new JLabel("Forgot Your Password? No Problem...");
 	      l1.setFont(new Font("Serif",Font.BOLD+Font.ITALIC,20));
 	      
@@ -54,7 +52,6 @@ public class Forgot_pass {
 	      passworderror_label1 = new JLabel("*");
 	      passworderror_label1.setForeground(Color.red);
 	      passworderror_label1.setVisible(false);
-	      
 	      
 	      userid = new JTextField(40);
 	      answer = new JTextField(40);
@@ -79,7 +76,8 @@ public class Forgot_pass {
 	      l3.setBounds(400, 300, 100, 20);
 	      answer.setBounds(550,300,100,20);
 	      
-	      l4.setBounds(400,450,180,20);	      pass.setBounds(550,450,100,20);
+	      l4.setBounds(400,450,180,20);
+	      pass.setBounds(550,450,100,20);
 	      
 	      l5.setBounds(400,500,200,20);
 	      pass1.setBounds(550,500,100,20);
@@ -97,9 +95,7 @@ public class Forgot_pass {
 	      
 	      reset.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				securityQ.setSelectedIndex(0);
 				userid.setText("");
 				pass.setText("");
@@ -117,35 +113,25 @@ public class Forgot_pass {
 	    			obj.init();
 	    			
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 	    	  }
 	      });
 	      
-	      
-	      
-	      
-	      
 	      submit1.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 
 				String st1 = userid.getText();
 				String st2 = securityQ.getSelectedItem().toString();
 				String st3 = answer.getText();
-				
 				System.out.println(st1+st2+st3);
+				
 				try
 				{
-					
 					db1.loader();
 					db1.getConnection();
-					
 					String query= "select * from usertab1 where user_id='"+st1+"'"+"and sec_q='"+st2+"'"+"and sec_a='"+st3+"'";
-					
 					ResultSet rs1=db1.fetchQuery(query);
 					
 					if(rs1.next())
@@ -160,7 +146,6 @@ public class Forgot_pass {
 					else
 					{
 						JOptionPane.showMessageDialog(null,"Login not successful");
-						//Login_screen obj = new Login_screen();
 						frame.dispose();    
 					}
 				}
@@ -172,12 +157,9 @@ public class Forgot_pass {
 			}
 		});
 	      
-	      
 	      submit2.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				
 				passworderror_label.setVisible(false);
 				passworderror_label1.setVisible(false);
@@ -214,9 +196,7 @@ public class Forgot_pass {
 						DBManager1 db1= new DBManager1();
 						db1.loader();
 						db1.getConnection();
-					
 						String query="update usertab1 set pass='"+st6+"'"+"where id='"+id+"'";
-						
 						int num = db1.updateRecord(query);
 						System.out.println("num"+num);
 						if(num == 1)
@@ -226,17 +206,13 @@ public class Forgot_pass {
 							Login_screen obj = new Login_screen();
 							obj.init();
 						}
-					
 					}
 					catch(Exception e)
 					{
 						e.printStackTrace();
 					}
-					
-					
 				}
 			}
-			
 		});
 	     
 	      p1.add(securityQ);
@@ -255,7 +231,6 @@ public class Forgot_pass {
 	      p1.add(l6);
 	      p1.add(userid);
 	      p1.add(back);
-	      
 	      p1.add(passworderror_label);p1.add(passworderror_label1);
 	      p1.setBounds(0,0,10000,10000);
 	      p1.setBackground(Color.WHITE);
@@ -263,10 +238,7 @@ public class Forgot_pass {
 	      frame.add(p1);
 	      frame.setVisible(true);
 	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	     // frame.setResizable(false);
 	      frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	      //this.dispose();
-
 	}
 
 

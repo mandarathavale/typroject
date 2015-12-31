@@ -17,9 +17,7 @@ public class temporary {
 		File image = new File(imagepath);
 		BufferedImage bimg = ImageIO.read(image);
 		String pixel[][] = new String[bimg.getWidth()][bimg.getHeight()];
-		//RandomAccessFile msgfile = new RandomAccessFile(filepath,"rw");
 		binaryString = ASCII.encode(filepath);
-		//BufferedImage dest = new BufferedImage(bimg.getWidth(),bimg.getHeight(),bimg.getType());
 		BufferedImage dest = new BufferedImage(bimg.getWidth(),bimg.getHeight(),BufferedImage.TYPE_3BYTE_BGR);
 		RandomAccessFile obj1 = new RandomAccessFile("after.txt","rw");
 //     	Original image data
@@ -28,7 +26,6 @@ public class temporary {
 			for(int j=0; j<bimg.getHeight(); j++)
 			{
 				pixel[i][j] = Integer.toBinaryString(bimg.getRGB(i, j));
-//				obj.writeBytes(pixel[i][j]+"\n");
 			}
 		}
 		//Adding bits inside LSB of blue value of each pixel

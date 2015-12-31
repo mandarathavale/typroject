@@ -43,21 +43,19 @@ public class Tabbedpane
 				if(rs.next())
 				{	
 					name = rs.getString(1);
-					username = new JLabel("Welcome..."+name);
+					username = new JLabel("Welcome "+name);
 					username.setFont(new Font("Times New Roman", Font.BOLD,35));
 					username.setForeground(Color.CYAN);
 					username.setBounds(0, 20, 1000, 35);
 				}
 				
-				
 				query="select filename from filetab1 where userid='"+userid+"'";
 				rs = db1.fetchQuery(query);
 				list1 = new DefaultListModel<String>();
 				list2 = new DefaultListModel<String>();
-				//int cnt=1;
+				
 				if(rs.next())
 				{	
-					//System.out.println(rs.getString(columnIndex));
 					while(!rs.isLast())
 					{
 						name = rs.getString(1);
@@ -95,8 +93,7 @@ public class Tabbedpane
 	        deletepath = new JTextField(150);
 	        
 	        JTabbedPane jtp = new JTabbedPane();
-	    //    jtp.setBounds(0, 150, screenSize.width, screenSize.height);
-
+	        
 	        filepath.setEditable(false);
 	        encryptpath.setEditable(false);
 	        decryptpath.setEditable(false);
@@ -129,8 +126,6 @@ public class Tabbedpane
 	        p1.setLayout(null);
 	        jp1.setLayout(null);
 	        jp2.setLayout(null);
-	        //jp1.setBounds(0, 50,screenSize.width , screenSize.height);
-	        //jp2.setBounds(0, 50,screenSize.width , screenSize.height);
 	        jp2.add(b1);
 	        jp1.add(b2);
 	        jp1.add(l1);
@@ -149,10 +144,8 @@ public class Tabbedpane
 	        p1.add(username);
 	        b2.addActionListener(new ActionListener() 
 	        {
-				@Override
 				public void actionPerformed(ActionEvent arg0) 
 				{
-					// TODO Auto-generated method stub
 					File_chooser obj = new File_chooser();
 					path = obj.init(1,userid);
 					filepath.setText(path);
@@ -185,9 +178,6 @@ public class Tabbedpane
 							frame.dispose();
 							Tabbedpane obj1 = new Tabbedpane();
 							obj1.init(userid);
-							
-							//Login_screen obj = new Login_screen();
-							//obj.init();
 						}
 						else
 						{
@@ -204,10 +194,8 @@ public class Tabbedpane
 	        
 	        b4.addActionListener(new ActionListener() 
 	        {
-				@Override
 				public void actionPerformed(ActionEvent arg0) 
 				{
-					// TODO Auto-generated method stub
 					String name = (String) jlist1.getSelectedValue();
 					String fname = "/home/mandar/Files_Uploaded/"+name;
 					System.out.println(fname);
@@ -221,7 +209,6 @@ public class Tabbedpane
 						temp.getConnection();
 						String query="delete from filetab1 where filename='"+name+"'";
 						temp.deleteRecord(query);
-						//deletepath.setText(path);
 						temp.closeConnection();
 						frame.dispose();
 						Tabbedpane obj1 = new Tabbedpane();
@@ -231,23 +218,18 @@ public class Tabbedpane
 					{
 						JOptionPane.showMessageDialog(null, "You are not authorised to delete this file");
 					}
-					
 				}
 			});
 	        
-	        
 	        b1.addActionListener(new ActionListener() 
 	        {
-				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					// TODO Auto-generated method stub
 					
 					String name = (String) jlist2.getSelectedValue();
 					File fileToSave = new File(name);
 					
 					 if(fileToSave.getName().startsWith(""+userid))
 					    {
-					 
 						  	Object[] selectionValues = { "Additive Cipher", "Caesar Cipher" };
 						  	String initialSelection = "Additive Cipher";
 						  	Object selection = JOptionPane.showInputDialog(null, "Please choose algorithm?",
@@ -275,7 +257,6 @@ public class Tabbedpane
 								    	try {
 											obj.encrypt(new File(filepath),key);
 										} catch (Exception e) {
-											// TODO Auto-generated catch block
 											e.printStackTrace();
 										}
 								    	
@@ -288,7 +269,6 @@ public class Tabbedpane
 											temporary.init(fileToSave1.getAbsolutePath(),encryptedFile);
 										} 
 										catch (Exception e) {
-											// TODO Auto-generated catch block
 											e.printStackTrace();
 										}
 									}
@@ -334,10 +314,8 @@ public class Tabbedpane
 	        
 	        b3.addActionListener(new ActionListener() 
 	        {
-				@Override
 				public void actionPerformed(ActionEvent arg0) 
 				{
-					// TODO Auto-generated method stub
 					File_chooser obj = new File_chooser();
 					path = obj.init(4,userid);
 					decryptpath.setText(path);
@@ -350,15 +328,12 @@ public class Tabbedpane
 	        
 	        logout.addActionListener(new ActionListener() {
 				
-				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					// TODO Auto-generated method stub
 					frame.dispose();
 					Login_screen obj = new Login_screen();
 					try {
 						obj.init();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

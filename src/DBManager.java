@@ -1,6 +1,3 @@
-
-//package DBManager;
-
 import java.sql.*;
 public class DBManager
 {

@@ -5,7 +5,6 @@ import java.io.*;
 
 public class File_chooser{
 
-	//static int ecnt=1;
 	static String key = new String();
 	
 	public String init(int choice,int userid)
@@ -15,14 +14,11 @@ public class File_chooser{
 		fileChooser.setDialogTitle("Upload a file to directory");   
 		String path = new String();
 		int userSelection = fileChooser.showOpenDialog(null);
-		 
-		//String userid1 = ""+userid;
 		
 		if (userSelection == JFileChooser.APPROVE_OPTION) 
 		{
 		    
 			File fileToSave = fileChooser.getSelectedFile();
-		    //System.out.println(fileToSave.getAbsolutePath());
 		    path = fileChooser.getSelectedFile().getAbsolutePath();
 		  try {
 			  		  
@@ -153,52 +149,36 @@ public class File_chooser{
 					  String initialSelection = "Additive Cipher";
 					  Object selection = JOptionPane.showInputDialog(null, "Please choose algorithm?",
 				        "Algorithm Selection", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
-				    //System.out.println(selection);
-				    
 					  JOptionPane.showMessageDialog(null, "Are you sure???");
-					  //JOptionPane optionPane = new JOptionPane("Continue printing?", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
-					  
 					  File encrypted = ReadMessage.init(fileToSave.getAbsolutePath());
 					  
-					  if(selection == "Additive Cipher"){
-				    
+					  if(selection == "Additive Cipher")
+					  {
 				    	Keyaddition1 obj = new Keyaddition1();
-				    	
 				    	Object result = JOptionPane.showInputDialog(null, "Enter Key", "Enter key");
 						key = result.toString();
-				    	
 				    	obj.decrypt(encrypted,key);
 						return fileToSave.getAbsolutePath();
 					  }
-					  else{
+					  else
+					  {
 				    	Rot13.decrypt(encrypted);
-				    	 return fileToSave.getAbsolutePath();
+				    	return fileToSave.getAbsolutePath();
 					  }
 				    }
-				    
 				    else
 				    {
 				    	JOptionPane.showMessageDialog(null, "This file is not an image");
 						  return "FAILED";
 				    }
-				    
 			  }
-	    	    
-			  
 		   }
 			
 		 catch (Exception e) {
 				
 				e.printStackTrace();
 			}
-		    
-		  
 		}
-		
-		
-		
-		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		//parentFrame.setBounds(0,0,screenSize.width, screenSize.height);
 		parentFrame.setLayout(null);
 		parentFrame.add(fileChooser);
 		parentFrame.setVisible(true);
@@ -206,5 +186,4 @@ public class File_chooser{
 		parentFrame.dispose();
 		return path;
 	}
-	
 }

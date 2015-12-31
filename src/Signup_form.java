@@ -1,6 +1,4 @@
-//import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,11 +7,9 @@ import java.sql.PreparedStatement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Signup_form{
-
+public class Signup_form {
 	JTextField name,email,userid,answer;
 	JLabel name1,email1,userid1,passwd,passwd1,signup,sec,ans,answererror_label,nameerror_label,usernameerror_label,emailerror_label,passworderror_label,passconform_label,submiterror_label,reseterror_label;
-;
 	JButton submit,reset,back;
 	JComboBox<String> securityQ;
 	JPasswordField pass,pass1;
@@ -22,7 +18,6 @@ public class Signup_form{
 
 	Pattern name_pattern,email_pattern,username_pattern,password_pattern,answer_pattern;
 	Matcher mat_matcher,email_matcher,username_matcher,password_matcher,answer_matcher;
-	
 	
 	Signup_form()
 	{
@@ -35,7 +30,6 @@ public class Signup_form{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setBounds(0,0,screenSize.width, screenSize.height);
 		frame.setLayout(null);  
-		
 		
 		name = new JTextField(50);
 		email = new JTextField(20);
@@ -87,7 +81,6 @@ public class Signup_form{
 	      securityq.addElement("Where were you born?");
 
 	      securityQ = new JComboBox<String>(securityq);
-
 		
 		signup.setBounds(0,0,200,50);
 		
@@ -125,9 +118,7 @@ public class Signup_form{
 		
 		submit.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				
 				passconform_label.setVisible(false);
 				emailerror_label.setVisible(false);
@@ -135,7 +126,6 @@ public class Signup_form{
 				usernameerror_label.setVisible(false);
 				passworderror_label.setVisible(false);
 				answererror_label.setVisible(false);
-
 				
 				boolean flag = false;
 				System.out.println("submit");
@@ -171,7 +161,6 @@ public class Signup_form{
 					System.out.println("in userid");
 				}
 				
-				
 				String st4=email.getText();										//email pattern
 				email_pattern=Pattern.compile("^[_A-Za-z0-9]+(\\.[_A-Za-z0-9]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 				email_matcher=email_pattern.matcher(st4);
@@ -186,12 +175,10 @@ public class Signup_form{
 					flag=true;
 					System.out.println("in mail");
 				}
-				
 				String st6 = pass.getText();									//password
 				String st7 = pass1.getText();	
 				password_pattern=Pattern.compile("[a-z0-9A-Z]{6,10}");
 				password_matcher=password_pattern.matcher(st6);
-				
 				if(!password_matcher.matches())
 				{
 					if(!st6.isEmpty())
@@ -213,17 +200,11 @@ public class Signup_form{
 						flag = true;
 						System.out.println("in pass match");					
 					}
-					
 				}
-				
 				st7 = securityQ.getSelectedItem().toString();
 				String st8 = answer.getText();
-				
 				answer_pattern = Pattern.compile("[a-zA-Z ]");
 				answer_matcher = answer_pattern.matcher(st8);
-				
-				//if(!answer_matcher.matches())
-				//{
 					if(st8.isEmpty() == true)
 					{
 						System.out.println("answer");
@@ -233,22 +214,14 @@ public class Signup_form{
 						System.out.println("in answer");
 				
 					}
-					//	}
-			//	*/
-			
-		
 				System.out.println("FLAG: "+flag);
-		
 			if(!flag)
 			{	
-				
 				DB.loader();
 				DB.getConnection();
 				int id=DB.getMaxId();
 				try
 				{
-					
-					//DB.getConnection("")
 					PreparedStatement ps = DB.con.prepareStatement("insert into usertab1 values(?,?,?,?,?,?,?)");
 					ps.setInt(1, id);
 					ps.setString(2,st3);
@@ -262,7 +235,7 @@ public class Signup_form{
 					
 					if(num>0)
 					{
-						JOptionPane.showMessageDialog(null, "Inserted Succesfully");
+						JOptionPane.showMessageDialog(null, "Account created successfully!");
 						frame.dispose();
 						Login_screen obj = new Login_screen();
 						obj.init();
@@ -277,29 +250,18 @@ public class Signup_form{
 					JOptionPane.showMessageDialog(null, "This userid is already taken. Please choose another");
 				}
 			}
-		
-		
 		}
-		
 	});
-		
-		
-		
-		
-		
 		
 		back.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				  Login_screen obj = new Login_screen();
 		    		try {
 						frame.dispose();
 		    			obj.init();
 		    			
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 			}
@@ -307,9 +269,7 @@ public class Signup_form{
 		
 		reset.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				name.setText("");
 				userid.setText("");
 				email.setText("");
@@ -338,13 +298,8 @@ public class Signup_form{
 		frame.add(passworderror_label);
 		frame.add(usernameerror_label);
 		frame.add(answererror_label);
-		//this.setBackground(Color.CYAN);	
-		//this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/media/sanket/8052954552954138/cryptography/keepcalm.jpg")))));
-		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	
-	
 	}
 }

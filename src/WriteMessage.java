@@ -11,16 +11,11 @@ public class WriteMessage
 		BufferedImage dest = new BufferedImage(bimg.getWidth(), bimg.getHeight(), bimg.getType());
 		dest.getGraphics().drawImage(bimg, 0, 0, null);
 		
-		
 		String array[] = imagename.split("/");
 		String imagename1 = array[array.length-1];
 		array = imagename1.split("\\.");
-		//String msg = "Mandar Athavale#";
-		//System.out.println(message);
 		String msg = message+"#";
 		System.out.println("MSG: "+msg);
-		//System.out.println(msg);
-		//System.out.println("len: "+msg.length());
 		int m;
 		int k = 0, v, p=7, result=0;
 		
@@ -40,7 +35,6 @@ public class WriteMessage
 							if( (result & 1) != 0 )
 								result ^= 1;
 						}
-						//System.out.println(result);
 						dest.setRGB(i, j, result);
 						tempcnt++;
 						p--;

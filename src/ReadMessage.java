@@ -6,12 +6,10 @@ class ReadMessage
 {
 	public static File init(String img) throws IOException
 	{
-	
 		File image = new File(img);
 		int v = 0, k=0,result;
 		BufferedImage bimg = null;
 		RandomAccessFile newfile = new RandomAccessFile("/home/mandar/AfterSteg/new.txt","rw");
-		
 		
 		try
 		{
@@ -27,7 +25,6 @@ class ReadMessage
 				v <<= 1;
 				if( (result & 1) != 0)
 					v |= 1;
-					
 				k++;
 				if(k==8)
 				{
@@ -36,24 +33,17 @@ class ReadMessage
 					{
 						break label;
 					}
-									
-					
 					else
 					{
 						System.out.println((char) v);
-						//newfile.writeChar(v);
 						String s = ""+(char)v;
 						newfile.writeBytes(s);
 						v = 0;
-						
 					}
-					//try { Thread.sleep(500); } catch(Exception e) { }
 				}
 			}
 		}
 		newfile.close();
 		return(new File("/home/mandar/AfterSteg/new.txt"));
-
 	}
-	
 }

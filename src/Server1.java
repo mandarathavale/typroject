@@ -7,9 +7,9 @@ import javax.imageio.ImageIO;
 public class Server1 {
 ServerSocket serverSocket = null;
 Socket socket = null;
+
 public Server1() {
     try {
-  
     	serverSocket = new ServerSocket(6002);
     	socket = serverSocket.accept();
         BufferedImage image = ImageIO.read(socket.getInputStream());
@@ -19,6 +19,7 @@ public Server1() {
         e.printStackTrace();
     }
 }
+
 public static void main(String[] args) {
     new Server1();
 }
