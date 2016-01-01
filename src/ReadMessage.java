@@ -9,7 +9,7 @@ class ReadMessage
 		File image = new File(img);
 		int v = 0, k=0,result;
 		BufferedImage bimg = null;
-		RandomAccessFile newfile = new RandomAccessFile("/home/mandar/AfterSteg/new.txt","rw");
+		RandomAccessFile newfile = new RandomAccessFile("/home/nahush/AfterSteg/new.txt","rw");
 		
 		try
 		{

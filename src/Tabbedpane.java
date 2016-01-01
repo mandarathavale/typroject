@@ -180,6 +180,7 @@ public class Tabbedpane
 								DB.closeConnection();
 								Path p = Paths.get(path);
 								list1.addElement(userid+p.getFileName().toString());
+								list2.addElement(userid+p.getFileName().toString());
 							}
 							else
 							{
@@ -215,6 +216,7 @@ public class Tabbedpane
 						temp.deleteRecord(query);
 						temp.closeConnection();
 						list1.removeElement(name);
+						list2.removeElement(name);
 						JOptionPane.showMessageDialog(null, "Successfully Deleted");
 					}
 					else
@@ -322,10 +324,6 @@ public class Tabbedpane
 					File_chooser obj = new File_chooser();
 					path = obj.init(4,userid);
 					decryptpath.setText(path);
-					frame.dispose();
-					Tabbedpane obj1 = new Tabbedpane();
-					obj1.init(userid);
-					
 				}
 			});
 	        

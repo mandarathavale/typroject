@@ -3,11 +3,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.font.TextAttribute;
 import java.io.*;
 import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.*;
+import java.util.*;
 
 public class Login_screen {
 	
@@ -19,6 +21,7 @@ public class Login_screen {
 	JButton log,pss,signup,forgot;
 	Pattern pass_pattern,userid_pattern;
 	Matcher mat_matcher;
+	Font original;
 	
 	void init() throws IOException
 	{
@@ -28,7 +31,7 @@ public class Login_screen {
 		frame.setBounds(0,0,screenSize.width, screenSize.height);
 		frame.setLayout(null);
 		login = new JTextField(20);
-		title = new JLabel("Cryptography");
+		title = new JLabel("File Security System");
 		title.setFont(new Font("Serif", Font.BOLD, 50));
 		id = new JLabel("USER ID: ");
 		pass = new JLabel("PASSWORD: ");
@@ -36,8 +39,8 @@ public class Login_screen {
 		log = new JButton("LOGIN");
 		pss = new JButton("RESET");
 		signup = new JButton("SIGNUP");
-		sign = new JLabel("New to this site? ---->>");
-		forg = new JLabel("Forgot your Password??");
+		sign = new JLabel("Create new account ->");
+		forg = new JLabel("Forgot your password?");
 		useriderror_label = new JLabel("*");
 		passerror_label = new JLabel("*");	
 		
@@ -51,13 +54,31 @@ public class Login_screen {
 		forg.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)
 			{
+				
 				frame.dispose();
 				Forgot_pass obj = new Forgot_pass();
 				obj.init();
 			}
+			
+			public void mouseEntered(MouseEvent e)
+			{
+				original = e.getComponent().getFont();
+		        Map attributes = original.getAttributes();
+		        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		        e.getComponent().setFont(original.deriveFont(attributes));
+				forg.setForeground(Color.BLUE);
+				forg.repaint();
+			}
+			
+			public void mouseExited(MouseEvent e)
+			{
+				e.getComponent().setFont(original);
+				forg.setForeground(Color.WHITE);
+				forg.repaint();
+			}
 		});
 		
-		title.setBounds(0,0,400,200);//label
+		title.setBounds(75,0,600,200);//label
 		title.setForeground(Color.WHITE);
 		
 		forg.setForeground(Color.WHITE);
@@ -80,7 +101,7 @@ public class Login_screen {
 		pss.setBounds(650,400, 100,20);//button
 		pss.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
-		sign.setBounds(500,450,200,20);
+		sign.setBounds(470,450,300,20);
 		sign.setForeground(Color.WHITE);
 		sign.setFont(new Font("Serif", Font.BOLD, 16));
 		

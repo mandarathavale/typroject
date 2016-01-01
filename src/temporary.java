@@ -56,7 +56,7 @@ public class temporary {
 		}
 		obj1.close();
 		
-		image = new File("/home/mandar/Steg/"+imagename1);
+		image = new File("/home/nahush/Steg/"+imagename1);
 		ImageIO.write(dest, array[array.length-1], image);
 	}
 }
